@@ -35,16 +35,16 @@ public class mainClass
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             switch (userIn) {
                 case "put":
-                    Console.Write("put what?:");
+                    Console.Write("put: ");
                     string putVal = Console.ReadLine();
                     Console.WriteLine(putVal);
                     break;
                 case "get":
-                    Console.Write("get what?:");
+                    Console.Write("get: ");
                     Console.ReadLine();
                     break;
                 case "getandstore":
-                    Console.Write("get what?:");
+                    Console.Write("get: ");
                     string valueStore = Console.ReadLine();
                     Console.Write("would you like to read the value you just stored? (yes/no): ");
                     string readOption = Console.ReadLine();
