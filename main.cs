@@ -79,6 +79,9 @@ public class main
                         Console.WriteLine("okay");
                         break;
                     }
+                case "thank you":
+                    Console.WriteLine("you're welcome");
+                    break;
                 case "clear":
                     Console.Clear();
                     break;
