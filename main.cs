@@ -56,6 +56,7 @@ public class mainClass
                         break;
                     }
                 case "exit":
+                    Console.ResetColor();
                     System.Environment.Exit(1);
                     break;
                 case "help":
