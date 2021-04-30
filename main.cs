@@ -2,27 +2,27 @@ using System;
 
 public class mainClass
 {
-        public void die(){
-            Console.ResetColor();
-            throw new Exception();
-        }
+    public static void die(){
+        Console.ResetColor();
+        throw new Exception();
+    }
 
-        public void help(){
-            string[] cmds = {
-                "put: allows you to write text to the screen",
-                "get: allows you to get input",
-                "getandstore: allows you to get input, store it, then choose whether to display it afterwards or not",
-                "help: displays these entries",
-                "?: is an alias for help",
-                "exit: exits bluebird",
-                "retin: returns the command that you just input (this should ALWAYS return the value of \"retin\")",
-                "crash: throws an exception that the program does not handle",
-                "clear: clears the console output"
-            };
-            for (int i = 0; i < cmds.Length; i++) {
-                Console.WriteLine(cmds[i]);
-            }
+    public static void help(){
+        string[] cmds = {
+            "put: allows you to write text to the screen",
+            "get: allows you to get input",
+            "getandstore: allows you to get input, store it, then choose whether to display it afterwards or not",
+            "help: displays these entries",
+            "?: is an alias for help",
+            "exit: exits bluebird",
+            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin\")",
+            "crash: throws an exception that the program does not handle",
+            "clear: clears the console output"
+        };
+        for (int i = 0; i < cmds.Length; i++) {
+            Console.WriteLine(cmds[i]);
         }
+    }
 
     public static void Main(string[] args)
     {
@@ -58,10 +58,10 @@ public class mainClass
                     System.Environment.Exit(1);
                     break;
                 case "help":
-                    methodClass.help();
+                    help();
                     break;
                 case "?":
-                    methodClass.help();
+                    help();
                     break;
                 case "retin":
                     Console.WriteLine(userIn);
@@ -73,7 +73,7 @@ public class mainClass
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (crashOption == "yes") {
                         Console.WriteLine("crashing...");
-                        methodClass.die();
+                        die();
                         break;
                     } else {
                         Console.WriteLine("okay");
