@@ -1,0 +1,8 @@
+# precompiled binaries
+*.exe
+
+# auto compilation files (a copy of this command will be in the readme anyway)
+compile.bat
+
+# i'm lazy okay
+start.bat
