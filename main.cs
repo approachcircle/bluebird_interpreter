@@ -72,6 +72,7 @@ public class mainClass
                 case "crash;":
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("are you sure you want to do this? (yes/no): ");
+                    Console.ResetColor();
                     string crashOption = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (crashOption == "yes") {
@@ -79,6 +80,7 @@ public class mainClass
                         die();
                         break;
                     } else {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("okay");
                         break;
                     }
