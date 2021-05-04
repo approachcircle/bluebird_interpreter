@@ -15,7 +15,7 @@ public class mainClass
             "help: displays these entries",
             "?: is an alias for help",
             "exit: exits bluebird",
-            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin\";)",
+            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin;\")",
             "crash: throws an exception that the program does not handle",
             "clear: clears the console output",
             "thank you: you're welcome"
