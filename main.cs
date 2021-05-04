@@ -99,6 +99,9 @@ public class mainClass
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     userIn = userIn.Trim( new Char[] {';'} );
+                    /** delete the semicolon from the end of the user input variable,
+                    since thats internal and shouldn't be displayed to the user in 
+                    the syntax error message **/
                     Console.WriteLine("syntax error: \"" + userIn + "\" was an unexpected token at this time.");
                     break;
             }
