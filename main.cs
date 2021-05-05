@@ -2,9 +2,9 @@ using System;
 
 public class mainClass
 {
-    public static void die(){
+    public static void die(string what = "no reason given"){
         Console.ResetColor();
-        throw new Exception();
+        throw new Exception(what);
     }
 
     public static void help(){
@@ -77,7 +77,7 @@ public class mainClass
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (crashOption == "yes") {
                         Console.WriteLine("crashing...");
-                        die();
+                        die("user defined crash inflicted");
                         break;
                     } else {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -95,6 +95,7 @@ public class mainClass
                 case ";":
                     break;
                 case null:
+                    die("null value entered");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
