@@ -11,14 +11,16 @@ public class mainClass
         string[] cmds = {
             "put: allows you to write text to the screen",
             "get: allows you to get input",
-            "getandstore: allows you to get input, store it, then choose whether to display it afterwards or not",
+            "getandstore: allows you to get input, store it to the memory slot, then choose whether to display it afterwards or not",
             "help: displays these entries",
             "?: is an alias for help",
             "exit: exits bluebird",
             "retin: returns the command that you just input (this should ALWAYS return the value of \"retin&\")",
             "crash: throws an exception that the program does not handle",
             "clear: clears the console output",
-            "thank you: you're welcome"
+            "thank you: you're welcome",
+            "recallmem: recalls the value stored in the memory slot",
+            "clearmem: clears the value stored in the memory slot"
         };
         for (int i = 0; i < cmds.Length; i++) {
             Console.WriteLine(cmds[i]);
@@ -52,6 +54,7 @@ public class mainClass
                 case "getandstore&":
                     Console.Write("get: ");
                     valueStore = Console.ReadLine();
+                    Console.WriteLine("value saved to memory slot");
                     Console.Write("would you like to read the value you just stored? (yes/no): ");
                     string readOption = Console.ReadLine();
                     if (readOption == "yes") {
@@ -95,10 +98,14 @@ public class mainClass
                 case "recallmem&":
                     if (valueStore == "") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("error: no value to recall");
+                        Console.WriteLine("error: no value to recall from memory slot");
                     } else {
                         Console.WriteLine("value is: \"" + valueStore + "\"");
                     }
+                    break;
+                case "clearmem&":
+                    valueStore = "";
+                    Console.WriteLine("memory slot cleared");
                     break;
                 case "clear&":
                     Console.Clear();
