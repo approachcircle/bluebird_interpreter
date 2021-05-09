@@ -1,5 +1,5 @@
 ---
-name: Unfixable issue
+name: unfixable issue
 about: describe the unfixable issue here
 title: ''
 labels: ''
