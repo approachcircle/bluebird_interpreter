@@ -1,6 +1,6 @@
 ---
 name: Unfixable issue
-about: Describe this issue template's purpose here.
+about: describe the unfixable issue here
 title: ''
 labels: ''
 assignees: approachcircle
@@ -15,4 +15,4 @@ assignees: approachcircle
 
 # solution
 
-(describe the possible solutions)
+- (describe the possible solutions here in this list)
