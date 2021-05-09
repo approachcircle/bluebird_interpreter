@@ -44,19 +44,26 @@ public class mainClass
             switch (userIn) {
                 case "put&":
                     Console.Write("put: ");
+                    Console.ResetColor();
                     string putVal = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine(putVal);
                     break;
                 case "get&":
                     Console.Write("get: ");
+                    Console.ResetColor();
                     Console.ReadLine();
                     break;
                 case "getandstore&":
                     Console.Write("get: ");
+                    Console.ResetColor();
                     valueStore = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("value saved to memory slot");
                     Console.Write("would you like to read the value you just stored? (yes/no): ");
+                    Console.ResetColor();
                     string readOption = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (readOption == "yes") {
                         Console.WriteLine(valueStore);
                         break;
