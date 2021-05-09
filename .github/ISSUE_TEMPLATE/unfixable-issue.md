@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD041 -->
+
 ---
 name: unfixable issue
 about: describe the unfixable issue here
@@ -15,4 +17,4 @@ assignees: approachcircle
 
 # solution
 
-- (describe the possible solutions here in this list)
+    - (describe the possible solutions here in this list)
