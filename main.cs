@@ -88,7 +88,7 @@ public class mainClass
                 case "thank you;":
                     Console.WriteLine("you're welcome");
                     break;
-                case "recall;":
+                case "recallmem;":
                     if (valueStore == "") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: no value to recall");
