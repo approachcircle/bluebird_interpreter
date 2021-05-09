@@ -15,7 +15,7 @@ public class mainClass
             "help: displays these entries",
             "?: is an alias for help",
             "exit: exits bluebird",
-            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin;\")",
+            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin&\")",
             "crash: throws an exception that the program does not handle",
             "clear: clears the console output",
             "thank you: you're welcome"
@@ -33,19 +33,23 @@ public class mainClass
             Console.Write("bluebird>");
             Console.ResetColor();
             string userIn = Console.ReadLine();
-            userIn = userIn + ";"; // more failsafe syntax type shit or whatever, kinda just felt like adding this as a feature
+            userIn = userIn + "&";
+            /**
+            the above line verifies that commands have been
+            executed through the readline method above
+            **/
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             switch (userIn) {
-                case "put;":
+                case "put&":
                     Console.Write("put: ");
                     string putVal = Console.ReadLine();
                     Console.WriteLine(putVal);
                     break;
-                case "get;":
+                case "get&":
                     Console.Write("get: ");
                     Console.ReadLine();
                     break;
-                case "getandstore;":
+                case "getandstore&":
                     Console.Write("get: ");
                     valueStore = Console.ReadLine();
                     Console.Write("would you like to read the value you just stored? (yes/no): ");
@@ -57,20 +61,20 @@ public class mainClass
                         Console.WriteLine("okay");
                         break;
                     }
-                case "exit;":
+                case "exit&":
                     Console.ResetColor();
                     System.Environment.Exit(0);
                     break;
-                case "help;":
+                case "help&":
                     help();
                     break;
-                case "?;":
+                case "?&":
                     help();
                     break;
-                case "retin;":
+                case "retin&":
                     Console.WriteLine(userIn);
                     break;
-                case "crash;":
+                case "crash&":
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("are you sure you want to do this? (yes/no): ");
                     Console.ResetColor();
@@ -85,10 +89,10 @@ public class mainClass
                         Console.WriteLine("okay");
                         break;
                     }
-                case "thank you;":
+                case "thank you&":
                     Console.WriteLine("you're welcome");
                     break;
-                case "recallmem;":
+                case "recallmem&":
                     if (valueStore == "") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: no value to recall");
@@ -96,22 +100,26 @@ public class mainClass
                         Console.WriteLine("value is: \"" + valueStore + "\"");
                     }
                     break;
-                case "clear;":
+                case "clear&":
                     Console.Clear();
                     break;
                 case "":
                     break;
-                case ";":
+                case "&":
                     break;
                 case null:
                     die("null value entered");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    userIn = userIn.Trim(new Char[] {';'});
-                    /** delete the semicolon from the end of the user input variable,
-                    since thats internal and shouldn't be displayed to the user in 
-                    the syntax error message **/
+                    userIn = userIn.Trim(new Char[] {'&'});
+                    /**
+                    the above line deletes the semicolon
+                    from the end of the user input variable,
+                    since thats internal and shouldn't be
+                    displayed to the user in the syntax
+                    error message
+                    **/
                     Console.WriteLine("error: \"" + userIn + "\" was an unexpected token at this time.");
                     break;
             }
