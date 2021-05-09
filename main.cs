@@ -27,6 +27,7 @@ public class mainClass
 
     public static void Main(string[] args)
     {
+        string valueStore = "";
         while (true) {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("bluebird>");
@@ -46,7 +47,7 @@ public class mainClass
                     break;
                 case "getandstore;":
                     Console.Write("get: ");
-                    string valueStore = Console.ReadLine();
+                    valueStore = Console.ReadLine();
                     Console.Write("would you like to read the value you just stored? (yes/no): ");
                     string readOption = Console.ReadLine();
                     if (readOption == "yes") {
@@ -87,6 +88,14 @@ public class mainClass
                 case "thank you;":
                     Console.WriteLine("you're welcome");
                     break;
+                case "recall;":
+                    if (valueStore == "") {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: no value to recall");
+                    } else {
+                        Console.WriteLine("value is: \"" + valueStore + "\"");
+                    }
+                    break;
                 case "clear;":
                     Console.Clear();
                     break;
@@ -99,11 +108,11 @@ public class mainClass
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    userIn = userIn.Trim( new Char[] {';'} );
+                    userIn = userIn.Trim(new Char[] {';'});
                     /** delete the semicolon from the end of the user input variable,
                     since thats internal and shouldn't be displayed to the user in 
                     the syntax error message **/
-                    Console.WriteLine("syntax error: \"" + userIn + "\" was an unexpected token at this time.");
+                    Console.WriteLine("error: \"" + userIn + "\" was an unexpected token at this time.");
                     break;
             }
         }
