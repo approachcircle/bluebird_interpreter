@@ -128,7 +128,7 @@ public class mainClass
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     userIn = userIn.Trim(new Char[] {'&'});
                     /**
-                    the above line deletes the semicolon
+                    the above line deletes the end character
                     from the end of the user input variable,
                     since thats internal and shouldn't be
                     displayed to the user in the syntax
