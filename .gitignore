@@ -6,3 +6,6 @@ compile.bat
 
 # i'm lazy okay
 start.bat
+
+# crash dumps, shouldn't be distrubuted
+dump.dat
