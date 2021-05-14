@@ -81,6 +81,11 @@ public class mainClass
                     Console.ReadLine();
                     break;
                 case "getandstore&":
+                    if (valueStore != "") {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write("get: ");
                     Console.ResetColor();
                     valueStore = Console.ReadLine();
