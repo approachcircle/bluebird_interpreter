@@ -1,10 +1,25 @@
 using System;
+using System.IO;
 
 public class mainClass
 {
-    public static void die(string what = "no reason given"){
+    public static void die(string data, string what = "no reason given") {
         Console.ResetColor();
-        throw new Exception(what);
+        if (data == "") {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("crashing...");
+            throw new Exception(what);
+        } else {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("info: crash inflicted, dumping data...");
+            File.WriteAllText(@"dump.dat", data);
+            Console.WriteLine("info: data dumped");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("crashing...");
+            throw new Exception(what);
+        }
+        
     }
 
     public static void help(){
@@ -29,7 +44,18 @@ public class mainClass
 
     public static void Main(string[] args)
     {
+        bool dumpExists = File.Exists(@"dump.dat");
         string valueStore = "";
+        if (dumpExists == true) {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("info: last exit was unclean, recovering data...");
+            string[] filelines = File.ReadAllLines("dump.dat");
+            string newval = String.Concat(filelines);
+            valueStore = newval;
+            Console.WriteLine("info: data has been written to memory slot, deleting dump...");
+            File.Delete(@"dump.dat");
+            Console.WriteLine("info: dump deleted");
+        }
         while (true) {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("bluebird>");
@@ -89,10 +115,12 @@ public class mainClass
                     Console.WriteLine("are you sure you want to do this? (yes/no): ");
                     Console.ResetColor();
                     string crashOption = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (crashOption == "yes") {
-                        Console.WriteLine("crashing...");
-                        die("user defined crash inflicted");
+                        if (valueStore == "") {
+                            die("", "user inflicted crash");
+                        } else {
+                            die(valueStore, "user inflicted crash");
+                        }
                         break;
                     } else {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -128,7 +156,11 @@ public class mainClass
                 case "&":
                     break;
                 case null:
-                    die("null value entered");
+                    if (valueStore == "") {
+                        die("", "null value entered");
+                    } else {
+                        die(valueStore, "null value entered");
+                    }
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
