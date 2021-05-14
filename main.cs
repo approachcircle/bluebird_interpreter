@@ -111,9 +111,15 @@ public class mainClass
                     }
                     break;
                 case "clearmem&":
-                    valueStore = "";
-                    Console.WriteLine("memory slot cleared");
-                    break;
+                    if (valueStore == "") {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: no value in memory slot anyway");
+                        break;
+                    } else {
+                        valueStore = "";
+                        Console.WriteLine("memory slot cleared");
+                        break;
+                    }
                 case "clear&":
                     Console.Clear();
                     break;
