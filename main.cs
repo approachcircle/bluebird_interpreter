@@ -35,7 +35,8 @@ public class mainClass
             "clear: clears the console output",
             "thank you: you're welcome",
             "recallmem: recalls the value stored in the memory slot",
-            "clearmem: clears the value stored in the memory slot"
+            "clearmem: clears the value stored in the memory slot",
+            "delete: allows you to delete a file with a specified filename"
         };
         for (int i = 0; i < cmds.Length; i++) {
             Console.WriteLine(cmds[i]);
