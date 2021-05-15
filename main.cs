@@ -146,7 +146,7 @@ public class mainClass
                 case "clearmem&":
                     if (valueStore == "") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("error: no value in memory slot anyway");
+                        Console.WriteLine("error: nothing to clear anyway");
                         break;
                     } else {
                         valueStore = "";
