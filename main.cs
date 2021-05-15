@@ -12,7 +12,7 @@ public class mainClass
         } else {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: crash inflicted, dumping data...");
-            File.WriteAllText(@"dump.dat", data);
+            File.WriteAllText("dump.dat", data);
             Console.WriteLine("info: data dumped");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -44,7 +44,7 @@ public class mainClass
 
     public static void Main(string[] args)
     {
-        bool dumpExists = File.Exists(@"dump.dat");
+        bool dumpExists = File.Exists("dump.dat");
         string valueStore = "";
         if (dumpExists == true) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -53,7 +53,7 @@ public class mainClass
             string newval = String.Concat(filelines);
             valueStore = newval;
             Console.WriteLine("info: data has been written to memory slot, deleting dump...");
-            File.Delete(@"dump.dat");
+            File.Delete("dump.dat");
             Console.WriteLine("info: dump deleted");
         }
         while (true) {
@@ -69,14 +69,14 @@ public class mainClass
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             switch (userIn) {
                 case "put&":
-                    Console.Write("put: ");
+                    Console.Write("put:");
                     Console.ResetColor();
                     string putVal = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine(putVal);
                     break;
                 case "get&":
-                    Console.Write("get: ");
+                    Console.Write("get:");
                     Console.ResetColor();
                     Console.ReadLine();
                     break;
@@ -86,12 +86,12 @@ public class mainClass
                         Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                     }
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.Write("get: ");
+                    Console.Write("get:");
                     Console.ResetColor();
                     valueStore = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("value saved to memory slot");
-                    Console.Write("would you like to read the value you just stored? (yes/no): ");
+                    Console.Write("would you like to read the value you just stored? (yes/no):");
                     Console.ResetColor();
                     string readOption = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -117,7 +117,7 @@ public class mainClass
                     break;
                 case "crash&":
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("are you sure you want to do this? (yes/no): ");
+                    Console.Write("are you sure you want to do this? (yes/no):");
                     Console.ResetColor();
                     string crashOption = Console.ReadLine();
                     if (crashOption == "yes") {
@@ -128,7 +128,7 @@ public class mainClass
                         }
                         break;
                     } else {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine("okay");
                         break;
                     }
@@ -151,6 +151,37 @@ public class mainClass
                     } else {
                         valueStore = "";
                         Console.WriteLine("memory slot cleared");
+                        break;
+                    }
+                case "delete&":
+                    Console.Write("delete (filename):");
+                    Console.ResetColor();
+                    string filename = Console.ReadLine();
+                    if (filename == "license") {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
+                        break;
+                    } else if (filename == "LICENSE") {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
+                        break;
+                    } else if (filename == "main.cs") {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: cannot delete source files, if you would like to delete this file, rename it to something other than \"main.cs\" and try again");
+                        break;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("are you sure you want to do this? (yes/no):");
+                    Console.ResetColor();
+                    string delOption = Console.ReadLine();
+                    if (delOption == "yes") {
+                        File.Delete(filename);
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("info: file deleted");
+                        break;
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("okay");
                         break;
                     }
                 case "clear&":
