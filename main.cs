@@ -3,23 +3,23 @@ using System.IO;
 
 public class mainClass
 {
-    public static void die(string data, string what = "no reason given") {
-        Console.ResetColor();
+    public static void dump(string data) {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         if (data == "") {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("crashing...");
-            throw new Exception(what);
+            Console.WriteLine("info: no data found in memory/provided to be dumped");
+            Console.ResetColor();
         } else {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("info: crash inflicted, dumping data...");
+            Console.WriteLine("info: dumping data...");
             File.WriteAllText("dump.dat", data);
             Console.WriteLine("info: data dumped");
             Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("crashing...");
-            throw new Exception(what);
         }
-        
+    }
+    public static void die(string why = "no reason for crash provided") {
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine("crashing...");
+        throw new Exception(why);
     }
 
     public static void help(){
@@ -36,7 +36,8 @@ public class mainClass
             "thank you: you're welcome",
             "recallmem: recalls the value stored in the memory slot",
             "clearmem: clears the value stored in the memory slot",
-            "delete: allows you to delete a file with a specified filename"
+            "delete: allows you to delete a file with a specified filename",
+            "dump: allows you to dump custom data, or dump the data straight from memory, if there is any"
         };
         for (int i = 0; i < cmds.Length; i++) {
             Console.WriteLine(cmds[i]);
@@ -122,11 +123,8 @@ public class mainClass
                     Console.ResetColor();
                     string crashOption = Console.ReadLine();
                     if (crashOption == "yes") {
-                        if (valueStore == "") {
-                            die("", "user inflicted crash");
-                        } else {
-                            die(valueStore, "user inflicted crash");
-                        }
+                        dump(valueStore);
+                        die("user inflicted crash");
                         break;
                     } else {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -185,6 +183,22 @@ public class mainClass
                         Console.WriteLine("okay");
                         break;
                     }
+                case "dump&":
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("would you like to dump data from memory, or dump your own custom data? (mem/custom):");
+                    Console.ResetColor();
+                    string dumpWhat = Console.ReadLine();
+                    if (dumpWhat == "mem") {
+                        dump(valueStore);
+                        break;
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("please provide the custom data to be dumped:");
+                        Console.ResetColor();
+                        string customData = Console.ReadLine();
+                        dump(customData);
+                        break;
+                    }
                 case "clear&":
                     Console.Clear();
                     break;
@@ -193,11 +207,8 @@ public class mainClass
                 case "&":
                     break;
                 case null:
-                    if (valueStore == "") {
-                        die("", "null value entered");
-                    } else {
-                        die(valueStore, "null value entered");
-                    }
+                    dump(valueStore);
+                    die("null value was input");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -205,7 +216,7 @@ public class mainClass
                     /**
                     the above line deletes the end character
                     from the end of the user input variable,
-                    since thats internal and shouldn't be
+                    since that's internal and shouldn't be
                     displayed to the user in the syntax
                     error message
                     **/
