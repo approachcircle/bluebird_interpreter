@@ -65,8 +65,8 @@ public class mainClass
             string userIn = Console.ReadLine();
             userIn = userIn + "&";
             /**
-            the above line verifies that commands have been
-            executed through the readline method above
+            the above line adds the verification character
+            to the end of the input string
             **/
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             switch (userIn) {
@@ -216,7 +216,7 @@ public class mainClass
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     userIn = userIn.Trim(new Char[] {'&'});
                     /**
-                    the above line deletes the end character
+                    the above line deletes the verification character
                     from the end of the user input variable,
                     since that's internal and shouldn't be
                     displayed to the user in the syntax
