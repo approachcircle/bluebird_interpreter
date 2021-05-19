@@ -203,12 +203,14 @@ public class mainClass
                     Console.Clear();
                     break;
                 case "":
+                    dump(valueStore);
+                    die("data without the verification character at the end should never be processed");
                     break;
                 case "&":
                     break;
                 case null:
                     dump(valueStore);
-                    die("null value was input");
+                    die("data without the verification character at the end should never be processed");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
