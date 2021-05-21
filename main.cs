@@ -26,7 +26,7 @@ public class mainClass
         string[] cmds = {
             "put: allows you to write text to the screen",
             "get: allows you to get input",
-            "getandstore: allows you to get input, store it to the memory slot, then choose whether to display it afterwards or not",
+            "savetomem: allows you to get input, store it to the memory slot, then choose whether to display it afterwards or not",
             "help: displays these entries",
             "?: is an alias for help",
             "exit: exits bluebird",
@@ -70,22 +70,22 @@ public class mainClass
             **/
             switch (userIn) {
                 case "put&":
-                    Console.Write("put:");
+                    Console.Write("put (what):");
                     Console.ResetColor();
                     string putVal = Console.ReadLine();
                     Console.WriteLine(putVal);
                     break;
                 case "get&":
-                    Console.Write("get:");
+                    Console.Write("get (what):");
                     Console.ResetColor();
                     Console.ReadLine();
                     break;
-                case "getandstore&":
+                case "savetomem&":
                     if (valueStore != "") {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                     }
-                    Console.Write("get:");
+                    Console.Write("savetomem (what):");
                     Console.ResetColor();
                     valueStore = Console.ReadLine();
                     Console.WriteLine("value saved to memory slot");
@@ -176,7 +176,7 @@ public class mainClass
                     if (dumpWhat == "mem") {
                         dump(valueStore);
                         break;
-                    } else {
+                    } else if (dumpWhat == "custom") {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.Write("please provide the custom data to be dumped:");
                         Console.ResetColor();
