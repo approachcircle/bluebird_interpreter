@@ -68,13 +68,11 @@ public class mainClass
             the above line adds the verification character
             to the end of the input string
             **/
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
             switch (userIn) {
                 case "put&":
                     Console.Write("put:");
                     Console.ResetColor();
                     string putVal = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine(putVal);
                     break;
                 case "get&":
@@ -87,23 +85,11 @@ public class mainClass
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                     }
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write("get:");
                     Console.ResetColor();
                     valueStore = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("value saved to memory slot");
-                    Console.Write("would you like to read the value you just stored? (yes/no):");
-                    Console.ResetColor();
-                    string readOption = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    if (readOption == "yes") {
-                        Console.WriteLine(valueStore);
-                        break;
-                    } else {
-                        Console.WriteLine("okay");
-                        break;
-                    }
+                    break;
                 case "exit&":
                     Console.ResetColor();
                     System.Environment.Exit(0);
@@ -127,7 +113,6 @@ public class mainClass
                         die("user inflicted crash");
                         break;
                     } else {
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine("okay");
                         break;
                     }
