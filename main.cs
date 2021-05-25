@@ -58,6 +58,10 @@ public class mainClass
             File.Delete("dump.dat");
             Console.WriteLine("info: dump deleted");
         }
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("strike ctrl+c to terminate in case of an emergency");
+        Console.WriteLine("type \"help\" to see a list of available commands");
+        Console.ResetColor();
         while (true) {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("bluebird>");
@@ -184,6 +188,7 @@ public class mainClass
                         dump(customData);
                         break;
                     }
+                    break;
                 case "clear&":
                     Console.Clear();
                     break;
