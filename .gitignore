@@ -1,7 +1,7 @@
 # precompiled binaries
-/bin
+bin/*.exe
 
-# auto compilation files (a copy of this command will be in the readme anyway)
+# auto compilation files (a copy of the command in this batch file will be in the readme anyway)
 compile.bat
 
 # i'm lazy okay

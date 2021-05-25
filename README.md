@@ -16,10 +16,10 @@ if you download and install mono <a href="https://www.mono-project.com/download/
 bluebird is natively compiled using csc.exe. the command to compile the code into a working binary is as follows:
 
 ```shell
-csc main.cs /out:bluebird.exe
+csc main.cs /out:bin/bluebird.exe
 ```
 
-this will produce an executable binary with the filename 'bluebird.exe'.
+this will produce an executable binary with the filename 'bluebird.exe' in the "bin" directory.
 
 ## command list
 
