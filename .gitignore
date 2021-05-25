@@ -9,3 +9,6 @@ start.bat
 
 # crash dumps, shouldn't be distrubuted
 dump.dat
+
+# vscode workspaces
+*.code-workspace
