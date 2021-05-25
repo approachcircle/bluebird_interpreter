@@ -1,5 +1,5 @@
 # precompiled binaries
-*.exe
+/bin
 
 # auto compilation files (a copy of this command will be in the readme anyway)
 compile.bat
