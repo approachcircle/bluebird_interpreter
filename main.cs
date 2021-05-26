@@ -48,6 +48,7 @@ public class mainClass
 
     public static void Main(string[] args)
     {
+        Console.Title = "bluebird interpreter";
         bool dumpExists = File.Exists("dump.dat");
         string valueStore = "";
         if (dumpExists == true) {
