@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 
 public class mainClass
 {
@@ -37,7 +38,8 @@ public class mainClass
             "recallmem: recalls the value stored in the memory slot",
             "clearmem: clears the value stored in the memory slot",
             "delete: allows you to delete a file with a specified filename",
-            "dump: allows you to dump custom data, or dump the data straight from memory, if there is any"
+            "dump: allows you to dump custom data, or dump the data straight from memory, if there is any",
+            "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)"
         };
         for (int i = 0; i < cmds.Length; i++) {
             Console.WriteLine(cmds[i]);
@@ -189,6 +191,21 @@ public class mainClass
                         break;
                     }
                     break;
+                case "hangthread&":
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("are you sure you want to do this? (yes/no):");
+                    Console.ResetColor();
+                    string hangOption = Console.ReadLine();
+                    if (hangOption == "yes") {
+                        dump(valueStore);
+                        Console.Write("putting thread to sleep, goodnight...");
+                        while (true) {
+                            Thread.Sleep(0);
+                        }
+                    } else {
+                        Console.WriteLine("okay");
+                        break;
+                    }
                 case "clear&":
                     Console.Clear();
                     break;
