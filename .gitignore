@@ -1,14 +1,14 @@
 # precompiled binaries
 bin/*.exe
 
-# auto compilation files (a copy of the command in this batch file will be in the readme anyway)
-compile.bat
-
-# i'm lazy okay
-start.bat
+# auto compilation files etc (a copy of the compile command in one of these batch files will be in the readme anyway)
+*.bat
 
 # crash dumps, shouldn't be distrubuted
 dump.dat
 
 # vscode workspaces
 *.code-workspace
+
+# files for testing new bluebird functions
+testing/
