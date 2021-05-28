@@ -6,6 +6,7 @@ public class mainClass
 {
     public static void dump(string data) {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
         if (data == "") {
             Console.WriteLine("info: no data found in memory/provided to be dumped");
             Console.ResetColor();
@@ -199,7 +200,7 @@ public class mainClass
                     string hangOption = Console.ReadLine();
                     if (hangOption == "yes") {
                         dump(valueStore);
-                        Console.Write("putting thread to sleep, goodnight...");
+                        Console.WriteLine("putting thread to sleep, goodnight...");
                         while (true) {
                             Thread.Sleep(0);
                         }
