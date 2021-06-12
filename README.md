@@ -9,13 +9,11 @@ bluebird is an interpreter written in C#, that only exists because i was bored (
 
 ## compiling
 
-bluebird is natively compiled using csc.exe. the command to compile the code into a working binary is as follows:
+bluebird is natively compiled using csc.exe. this project has a makefile which you can execute with the correct targets though. the 'clean' target will delete the bluebird binary, the 'binary' target will produce an executable binary with the filename 'bluebird.exe' in the 'bin' directory, and the 'run' target executes the program. so the ideal make command would be:
 
-```shell
-csc main.cs /out:bin/bluebird.exe
+```make
+make clean binary run
 ```
-
-this will produce an executable binary with the filename 'bluebird.exe' in the "bin" directory.
 
 ## where do i get the compiler?
 
