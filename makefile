@@ -1,0 +1,9 @@
+binary:
+	@echo running compiler...
+	@csc main.cs /out:bin\bluebird.exe
+clean:
+	@echo deleting binary...
+	@del bin\bluebird.exe
+run:
+	@echo executing...
+	@bin\bluebird.exe
