@@ -15,3 +15,6 @@ testing/
 
 # open in current directory file
 start.bat
+
+# bluebird configuration files
+bluebird.cfg
