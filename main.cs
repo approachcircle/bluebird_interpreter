@@ -71,7 +71,8 @@ public class mainClass
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("bluebird>");
             Console.ResetColor();
-            string userIn = Console.ReadLine();
+            string userIn = Console.ReadLine(); // main command input method
+            userIn = userIn.ToLower();
             userIn = userIn + "&";
             /**
             the above line adds the verification character
