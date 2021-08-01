@@ -16,7 +16,6 @@ public class mainClass
         byte[] buffer = Encoding.ASCII.GetBytes (data);
         int timeout = 120;
         string address = "8.8.8.8";
-        //add try block to encapsulate Ping.Send() method, in case the address is invalid
         try {
             PingReply reply = pingSender.Send (address, timeout, buffer, options);
             if (reply.Status == IPStatus.Success) {
