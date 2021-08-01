@@ -24,7 +24,7 @@ public class mainClass
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("error: ping failed, check your connection to {0} and try again", address);
             }
-        } catch (PingException exc) {
+        } catch (PingException) {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked");
             Console.WriteLine("error: address value is: {0}, should be 8.8.8.8", address);
