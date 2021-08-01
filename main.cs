@@ -26,8 +26,8 @@ public class mainClass
             }
         } catch (PingException exc) {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to 8.8.8.8 has been blocked");
-            Console.WriteLine("error: address value is: {0}", address);
+            Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked");
+            Console.WriteLine("error: address value is: {0}, should be 8.8.8.8", address);
         }
     }
     public static void dump(string data) {
