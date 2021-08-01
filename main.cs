@@ -1,10 +1,36 @@
 using System;
 using System.IO;
+using System.Net;
+using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 public class mainClass
 {
+    public static void invokeping() {
+        Ping pingSender = new Ping();
+        PingOptions options = new PingOptions();
+        options.DontFragment = true;
+        string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        byte[] buffer = Encoding.ASCII.GetBytes (data);
+        int timeout = 120;
+        string address = "8.8.8.8";
+        //add try block to encapsulate Ping.Send() method, in case the address is invalid
+        try {
+            PingReply reply = pingSender.Send (address, timeout, buffer, options);
+            if (reply.Status == IPStatus.Success) {
+                Console.WriteLine("pong! {0}ms, buffer={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
+            } else {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("error: ping failed, check your connection to {0} and try again", address);
+            }
+        } catch (PingException exc) {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to 8.8.8.8 has been blocked");
+            Console.WriteLine("error: address value is: {0}", address);
+        }
+    }
     public static void dump(string data) {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
@@ -41,7 +67,8 @@ public class mainClass
             "clearmem: clears the value stored in the memory slot",
             "delete: allows you to delete a file with a specified filename",
             "dump: allows you to dump custom data, or dump the data straight from memory, if there is any",
-            "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)"
+            "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)",
+            "ping: gets current network ping in a single packet from this computer to 8.8.8.8 (google.com)"
         };
         for (int i = 0; i < cmds.Length; i++) {
             Console.WriteLine(cmds[i]);
@@ -134,7 +161,7 @@ public class mainClass
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: no value to recall from memory slot");
                     } else {
-                        Console.WriteLine("value is: \"" + valueStore + "\"");
+                        Console.WriteLine("value is: \"{0}\"", valueStore);
                     }
                     break;
                 case "clearmem&":
@@ -151,11 +178,8 @@ public class mainClass
                     Console.Write("delete (filename):");
                     Console.ResetColor();
                     string filename = Console.ReadLine();
+                    filename.ToLower();
                     if (filename == "license") {
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
-                        break;
-                    } else if (filename == "LICENSE") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
                         break;
@@ -210,6 +234,9 @@ public class mainClass
                         Console.WriteLine("okay");
                         break;
                     }
+                case "ping&":
+                    invokeping();
+                    break;
                 case "clear&":
                     Console.Clear();
                     break;
@@ -233,7 +260,7 @@ public class mainClass
                     displayed to the user in the syntax
                     error message
                     **/
-                    Console.WriteLine("error: \"" + userIn + "\" was an unexpected token at this time.");
+                    Console.WriteLine("error: \"{0}\" was an unexpected token at this time.", userIn);
                     break;
             }
         }
