@@ -171,8 +171,6 @@ public class mainClass
                     }
                 case "ping&":
                     ping.invokeping();
-                    Console.WriteLine("okay now let\'s try the new shit...");
-                    Console.WriteLine(ping.getms());
                     break;
                 case "clear&":
                     Console.Clear();
