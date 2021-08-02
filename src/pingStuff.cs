@@ -16,7 +16,7 @@ namespace bluebird {
             try {
                 PingReply reply = pingSender.Send (address, timeout, buffer, options);
                 if (reply.Status == IPStatus.Success) {
-                    Console.WriteLine("pong! {0}ms, buffer={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
+                    Console.WriteLine("pong! {0}ms, buffer_size={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
                 } else {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("error: ping failed, check your connection to {0} and try again", address);
@@ -42,6 +42,9 @@ namespace bluebird {
                 PingReply reply = pingSender.Send (address, timeout, buffer, options);
                 if (reply.Status == IPStatus.Success) {
                     long ms = reply.RoundtripTime;
+                    int rtbuffer = reply.Buffer.Length;
+                    int rtttl = reply.Options.Ttl;
+                    System.Net.IPAddress rtaddr = reply.Address;
                     return ms;
                 } else {
                     return "error: ping failed, check your connection to " + address + " and try again";
