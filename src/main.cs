@@ -15,7 +15,7 @@ public class mainClass
         emergency emg = new emergency();
         bool dumpExists = File.Exists("dump.dat");
         string valueStore = "";
-        if (dumpExists == true) {
+        if (dumpExists) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: last exit was unclean, recovering data...");
             string[] filelines = File.ReadAllLines("dump.dat");
@@ -114,6 +114,7 @@ public class mainClass
                     Console.ResetColor();
                     string filename = Console.ReadLine();
                     filename.ToLower();
+                    bool fileExists = File.Exists(filename);
                     if (filename == "license") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
@@ -121,6 +122,12 @@ public class mainClass
                     } else if (filename == "main.cs") {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: cannot delete source files, if you would like to delete this file, rename it to something other than \"main.cs\" and try again");
+                        break;
+                    }
+                    if (!fileExists) {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: this file doesn't exist anyway");
+                        Console.ResetColor();
                         break;
                     }
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -172,6 +179,28 @@ public class mainClass
                 case "ping&":
                     ping.invokeping();
                     break;
+                case "cleardump&":
+                    bool dumpExists2 = File.Exists("dump.dat");
+                    if (!dumpExists2) {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("error: a data dump created by bluebird does not exist anyway");
+                        Console.ResetColor();
+                        break;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("are you sure you want to do this? (yes/no):");
+                    Console.ResetColor();
+                    string deldOption = Console.ReadLine();
+                    if (deldOption == "yes") {
+                        File.Delete("dump.dat");
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("info: dump deleted");
+                        break;
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("okay");
+                        break;
+                    }
                 case "clear&":
                     Console.Clear();
                     break;
