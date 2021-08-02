@@ -1,5 +1,5 @@
 # precompiled binaries
-bin/*.exe
+bin/
 
 # crash dumps, shouldn't be distrubuted
 dump.dat
@@ -13,7 +13,7 @@ dump.dat
 # files for testing new bluebird functions
 testing/
 
-# open in current directory file
+# open current directory file
 start.bat
 
 # bluebird configuration files
