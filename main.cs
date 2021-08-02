@@ -3,78 +3,16 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
+using bluebird;
 
 public class mainClass
 {
-    public static void invokeping() {
-        Ping pingSender = new Ping();
-        PingOptions options = new PingOptions();
-        options.DontFragment = true;
-        string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        byte[] buffer = Encoding.ASCII.GetBytes (data);
-        int timeout = 120;
-        string address = "8.8.8.8";
-        try {
-            PingReply reply = pingSender.Send (address, timeout, buffer, options);
-            if (reply.Status == IPStatus.Success) {
-                Console.WriteLine("pong! {0}ms, buffer={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
-            } else {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("error: ping failed, check your connection to {0} and try again", address);
-            }
-        } catch (PingException) {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked");
-            Console.WriteLine("error: address value is: {0}, should be 8.8.8.8", address);
-        }
-    }
-    public static void dump(string data) {
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
-        if (data == "") {
-            Console.WriteLine("info: no data found in memory/provided to be dumped");
-            Console.ResetColor();
-        } else {
-            Console.WriteLine("info: dumping data...");
-            File.WriteAllText("dump.dat", data);
-            Console.WriteLine("info: data dumped");
-            Console.ResetColor();
-        }
-    }
-    public static void die(string why = "no reason for crash provided") {
-        Console.ResetColor();
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine("crashing...");
-        throw new Exception(why);
-    }
-
-    public static void help(){
-        string[] cmds = {
-            "put: allows you to write text to the screen",
-            "get: allows you to get input",
-            "savetomem: allows you to get input, store it to the memory slot, then choose whether to display it afterwards or not",
-            "help: displays these entries",
-            "?: is an alias for help",
-            "exit: exits bluebird",
-            "retin: returns the command that you just input (this should ALWAYS return the value of \"retin&\")",
-            "crash: throws an exception that the program does not handle",
-            "clear: clears the console output",
-            "thank you: you're welcome",
-            "recallmem: recalls the value stored in the memory slot",
-            "clearmem: clears the value stored in the memory slot",
-            "delete: allows you to delete a file with a specified filename",
-            "dump: allows you to dump custom data, or dump the data straight from memory, if there is any",
-            "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)",
-            "ping: gets current network ping in a single packet from this computer to 8.8.8.8 (google.com)"
-        };
-        for (int i = 0; i < cmds.Length; i++) {
-            Console.WriteLine(cmds[i]);
-        }
-    }
-
     public static void Main(string[] args)
     {
         Console.Title = "bluebird interpreter";
+        pingStuff ping = new pingStuff();
+        helpCommand helpcmd = new helpCommand();
+        emergency emg = new emergency();
         bool dumpExists = File.Exists("dump.dat");
         string valueStore = "";
         if (dumpExists == true) {
@@ -129,10 +67,10 @@ public class mainClass
                     System.Environment.Exit(0);
                     break;
                 case "help&":
-                    help();
+                    helpcmd.help();
                     break;
                 case "?&":
-                    help();
+                    helpcmd.help();
                     break;
                 case "retin&":
                     Console.WriteLine(userIn);
@@ -143,8 +81,8 @@ public class mainClass
                     Console.ResetColor();
                     string crashOption = Console.ReadLine();
                     if (crashOption == "yes") {
-                        dump(valueStore);
-                        die("user inflicted crash");
+                        emg.dump(valueStore);
+                        emg.die("user inflicted crash");
                         break;
                     } else {
                         Console.WriteLine("okay");
@@ -205,14 +143,14 @@ public class mainClass
                     Console.ResetColor();
                     string dumpWhat = Console.ReadLine();
                     if (dumpWhat == "mem") {
-                        dump(valueStore);
+                        emg.dump(valueStore);
                         break;
                     } else if (dumpWhat == "custom") {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.Write("please provide the custom data to be dumped:");
                         Console.ResetColor();
                         string customData = Console.ReadLine();
-                        dump(customData);
+                        emg.dump(customData);
                         break;
                     }
                     break;
@@ -222,7 +160,7 @@ public class mainClass
                     Console.ResetColor();
                     string hangOption = Console.ReadLine();
                     if (hangOption == "yes") {
-                        dump(valueStore);
+                        emg.dump(valueStore);
                         Console.WriteLine("putting thread to sleep, goodnight...");
                         while (true) {
                             Thread.Sleep(0);
@@ -232,20 +170,22 @@ public class mainClass
                         break;
                     }
                 case "ping&":
-                    invokeping();
+                    ping.invokeping();
+                    Console.WriteLine("okay now let\'s try the new shit...");
+                    Console.WriteLine(ping.getms());
                     break;
                 case "clear&":
                     Console.Clear();
                     break;
                 case "":
-                    dump(valueStore);
-                    die("data without the verification character at the end should never be processed");
+                    emg.dump(valueStore);
+                    emg.die("data without the verification character at the end should never be processed");
                     break;
                 case "&":
                     break;
                 case null:
-                    dump(valueStore);
-                    die("data without the verification character at the end should never be processed");
+                    emg.dump(valueStore);
+                    emg.die("data without the verification character at the end should never be processed");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
