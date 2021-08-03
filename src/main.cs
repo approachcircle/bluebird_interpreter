@@ -224,7 +224,7 @@ public class mainClass
                     displayed to the user in the syntax
                     error message
                     **/
-                    Console.WriteLine("error: \"{0}\" was an unexpected token at this time.", userIn);
+                    Console.WriteLine("error: \"{0}\" is not recognised as a valid command. check the spelling and try again", userIn);
                     break;
             }
         }
