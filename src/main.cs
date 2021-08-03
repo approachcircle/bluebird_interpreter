@@ -3,7 +3,9 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
-using bluebird;
+using bluebird.emergency;
+using bluebird.help;
+using bluebird.ping;
 
 public class mainClass
 {
