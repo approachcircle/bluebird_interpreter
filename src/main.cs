@@ -115,7 +115,7 @@ namespace bluebird {
                             Console.Write("delete (fileName):");
                             Console.ResetColor();
                             string fileName = Console.ReadLine();
-                            fileName.ToLower();
+                            fileName = fileName.ToLower();
                             if (fileName == "license") {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
@@ -207,6 +207,12 @@ namespace bluebird {
                                 Console.WriteLine("okay");
                                 break;
                             }
+                        // case "recalldump&":
+                        //    add ability to move dump data to memory
+                        //    break;
+                        // case "list&":
+                        //    list files using Directory.GetFiles()
+                        //    break;
                         case "clear&":
                             Console.Clear();
                             break;
