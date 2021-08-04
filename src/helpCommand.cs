@@ -3,7 +3,7 @@ using System.IO;
 
 namespace bluebird {
     namespace help {
-        class helpCommand {
+        class helpClass {
             public void help(){
                 string[] cmds = {
                     "put: allows you to write text to the screen",
@@ -21,7 +21,7 @@ namespace bluebird {
                     "delete: allows you to delete a file with a specified filename",
                     "dump: allows you to dump custom data, or dump the data straight from memory, if there is any",
                     "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)",
-                    "ping: gets current network ping in a single packet from this computer to 8.8.8.8 (google.com)",
+                    "ping: gets current network ping over the course of four packets from this computer to 8.8.8.8 (google.com)",
                     "cleardump: deletes any dump files that shouldn't be there, or that you would like to remove"
                 };
                 for (int i = 0; i < cmds.Length; i++) {

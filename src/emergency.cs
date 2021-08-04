@@ -3,7 +3,7 @@ using System.IO;
 
 namespace bluebird {
     namespace emergency {
-        class emergency {
+        class emergencyClass {
             public void dump(string data) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");

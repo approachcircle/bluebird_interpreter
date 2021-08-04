@@ -5,8 +5,8 @@ using System.Net.NetworkInformation;
 
 namespace bluebird {
     namespace ping {
-        class pingStuff {
-            public void invokeping() {
+        class pingClass {
+            public void invokePing() {
                 Ping pingSender = new Ping();
                 PingOptions options = new PingOptions();
                 options.DontFragment = true;
