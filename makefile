@@ -1,6 +1,6 @@
 binary:
 	@echo running compiler...
-	@csc src\main.cs src\pingStuff.cs src\helpCommand.cs src\emergency.cs -out:bin\bluebird.exe -nologo
+	@csc src\main.cs src\pingStuff.cs src\helpCommand.cs src\emergency.cs src\debug.cs -out:bin\bluebird.exe -nologo
 clean:
 	@echo deleting binary...
 	@del bin\bluebird.exe
