@@ -3,18 +3,20 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
-using bluebird.emergency;
 using bluebird.help;
 using bluebird.ping;
+using bluebird.debug;
+using bluebird.emergency;
 
 namespace bluebird {
     namespace main {
         public class mainClass {
             public static void Main(string[] args) {
                 Console.Title = "bluebird interpreter";
-                ping.pingStuff ping = new ping.pingStuff();
-                help.helpCommand helpcmd = new help.helpCommand();
-                emergency.emergency emg = new emergency.emergency();
+                ping.pingClass ping = new ping.pingClass();
+                help.helpClass help = new help.helpClass();
+                debug.debugClass debug = new debug.debugClass();
+                emergency.emergencyClass emergency = new emergency.emergencyClass();
                 bool dumpExists = File.Exists("dump.dat");
                 string memory = "";
                 if (dumpExists) {
@@ -69,10 +71,10 @@ namespace bluebird {
                             System.Environment.Exit(0);
                             break;
                         case "help&":
-                            helpcmd.help();
+                            help.help();
                             break;
                         case "?&":
-                            helpcmd.help();
+                            help.help();
                             break;
                         case "retin&":
                             Console.WriteLine(userIn);
@@ -83,8 +85,8 @@ namespace bluebird {
                             Console.ResetColor();
                             string crashOption = Console.ReadLine();
                             if (crashOption == "yes") {
-                                emg.dump(memory);
-                                emg.die("user inflicted crash");
+                                emergency.dump(memory);
+                                emergency.die("user inflicted crash");
                                 break;
                             } else {
                                 Console.WriteLine("okay");
@@ -156,14 +158,14 @@ namespace bluebird {
                             Console.ResetColor();
                             string dumpWhat = Console.ReadLine();
                             if (dumpWhat == "mem") {
-                                emg.dump(memory);
+                                emergency.dump(memory);
                                 break;
                             } else if (dumpWhat == "custom") {
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.Write("please provide the custom data to be dumped:");
                                 Console.ResetColor();
                                 string customData = Console.ReadLine();
-                                emg.dump(customData);
+                                emergency.dump(customData);
                                 break;
                             }
                             break;
@@ -173,7 +175,7 @@ namespace bluebird {
                             Console.ResetColor();
                             string hangOption = Console.ReadLine();
                             if (hangOption == "yes") {
-                                emg.dump(memory);
+                                emergency.dump(memory);
                                 Console.WriteLine("putting thread to sleep, goodnight...");
                                 while (true) {
                                     Thread.Sleep(0);
@@ -183,7 +185,10 @@ namespace bluebird {
                                 break;
                             }
                         case "ping&":
-                            ping.invokeping();
+                            ping.invokePing();
+                            ping.invokePing();
+                            ping.invokePing();
+                            ping.invokePing();
                             break;
                         case "cleardump&":
                             bool dumpExists2 = File.Exists("dump.dat");
@@ -217,14 +222,14 @@ namespace bluebird {
                             Console.Clear();
                             break;
                         case "":
-                            emg.dump(memory);
-                            emg.die("data without the verification character at the end should never be processed");
+                            emergency.dump(memory);
+                            emergency.die("data without the verification character at the end should never be processed");
                             break;
                         case "&":
                             break;
                         case null:
-                            emg.dump(memory);
-                            emg.die("null data entered, and no verification character was found in the string");
+                            emergency.dump(memory);
+                            emergency.die("null data entered, and no verification character was found in the string");
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
