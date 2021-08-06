@@ -6,8 +6,8 @@ using System.Net.NetworkInformation;
 using bluebird.help;
 using bluebird.ping;
 using bluebird.debug;
-using bluebird.emergency;
-using bluebird.exception;
+using bluebird.severe;
+using bluebird.exceptions;
 
 namespace bluebird {
 
@@ -21,7 +21,7 @@ namespace bluebird {
                 ping.pingClass ping = new ping.pingClass();
                 help.helpClass help = new help.helpClass();
                 debug.debugClass debug = new debug.debugClass();
-                emergency.emergencyClass emergency = new emergency.emergencyClass();
+                severe.severeClass severe = new severe.severeClass();
 
                 string memory = String.Empty;
 
@@ -95,7 +95,7 @@ namespace bluebird {
                             string crashOption = Console.ReadLine();
 
                             if (crashOption == "yes") {
-                                emergency.die(memory, new CrashCommandException("user executed crash command"));
+                                severe.die(memory, new CrashCommandException("user executed crash command"));
                                 break;
                             } else {
                                 Console.WriteLine("okay");
@@ -173,14 +173,14 @@ namespace bluebird {
                             string dumpWhat = Console.ReadLine();
 
                             if (dumpWhat == "mem") {
-                                emergency.dump(memory);
+                                severe.dump(memory);
                                 break;
                             } else if (dumpWhat == "custom") {
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.Write("please provide the custom data to be dumped:");
                                 Console.ResetColor();
                                 string customData = Console.ReadLine();
-                                emergency.dump(customData);
+                                severe.dump(customData);
                                 break;
                             }
                             break;
@@ -191,7 +191,7 @@ namespace bluebird {
                             string hangOption = Console.ReadLine();
 
                             if (hangOption == "yes") {
-                                emergency.dump(memory);
+                                severe.dump(memory);
                                 Console.WriteLine("putting thread to sleep, goodnight...");
                                 while (true) {
                                     Thread.Sleep(0);
@@ -263,12 +263,12 @@ namespace bluebird {
                             Console.Clear();
                             break;
                         case "":
-                            emergency.die(memory, new InvalidDataEnteredException("data without the verification character at the end should never be processed"));
+                            severe.die(memory, new InvalidDataEnteredException("data without the verification character at the end should never be processed"));
                             break;
                         case "&":
                             break;
                         case null:
-                            emergency.die(memory, new InvalidDataEnteredException("null data entered, and no verification character was found in the string"));
+                            severe.die(memory, new InvalidDataEnteredException("null data entered, and no verification character was found in the string"));
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.DarkRed;

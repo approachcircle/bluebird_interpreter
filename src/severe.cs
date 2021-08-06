@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using bluebird.main;
 using bluebird.debug;
-using bluebird.exception;
+using bluebird.exceptions;
 
 namespace bluebird {
-    namespace emergency {
-        class emergencyClass {
+    namespace severe {
+        class severeClass {
             public void dump(string data) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");

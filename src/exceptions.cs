@@ -2,7 +2,7 @@ using System;
 
 namespace bluebird {
 
-    namespace exception {
+    namespace exceptions {
 
         [Serializable]
         public class CrashCommandException : Exception {
