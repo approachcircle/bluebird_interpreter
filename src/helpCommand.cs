@@ -22,9 +22,11 @@ namespace bluebird {
                     "dump: allows you to dump custom data, or dump the data straight from memory, if there is any",
                     "hangthread: puts the main thread to sleep indefinitely (hangs the program forever)",
                     "ping: gets current network ping over the course of four packets from this computer to 8.8.8.8 (google.com)",
-                    "cleardump: deletes any dump files that shouldn't be there, or that you would like to remove"
+                    "cleardump: deletes any dump files that shouldn't be there, or that you would like to remove",
+                    "list: lists all files and directories in the current directory",
+                    "recalldump: moves data from a data dump into the memory slot"
                 };
-                
+
                 for (int i = 0; i < cmds.Length; i++) {
                     Console.WriteLine(cmds[i]);
                 }
