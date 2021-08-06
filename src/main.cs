@@ -18,7 +18,7 @@ namespace bluebird {
                 debug.debugClass debug = new debug.debugClass();
                 emergency.emergencyClass emergency = new emergency.emergencyClass();
                 bool dumpExists = File.Exists("dump.dat");
-                string memory = "";
+                string memory = String.Empty;
                 if (dumpExists) {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("info: last exit was unclean, recovering data...");
@@ -57,7 +57,7 @@ namespace bluebird {
                             Console.ReadLine();
                             break;
                         case "savetomem&":
-                            if (memory != "") {
+                            if (memory != String.Empty) {
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                             }
@@ -96,7 +96,7 @@ namespace bluebird {
                             Console.WriteLine("you're welcome");
                             break;
                         case "recallmem&":
-                            if (memory == "") {
+                            if (memory == String.Empty) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: no value to recall from memory slot");
                             } else {
@@ -104,12 +104,12 @@ namespace bluebird {
                             }
                             break;
                         case "clearmem&":
-                            if (memory == "") {
+                            if (memory == String.Empty) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: nothing to clear anyway");
                                 break;
                             } else {
-                                memory = "";
+                                memory = String.Empty;
                                 Console.WriteLine("memory slot cleared");
                                 break;
                             }
