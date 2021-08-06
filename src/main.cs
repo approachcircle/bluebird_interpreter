@@ -24,9 +24,8 @@ namespace bluebird {
                 emergency.emergencyClass emergency = new emergency.emergencyClass();
 
                 string memory = String.Empty;
-                bool dumpExists = File.Exists("dump.dat");
 
-                if (dumpExists) {
+                if (File.Exists("dump.dat")) {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("info: last exit was unclean, recovering data...");
                     string[] fileLines = File.ReadAllLines("dump.dat");
@@ -144,9 +143,8 @@ namespace bluebird {
                                 Console.ResetColor();
                                 break;
                             }
-                            bool fileExists = File.Exists(fileName);
 
-                            if (!fileExists) {
+                            if (!File.Exists(fileName)) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: this file doesn't exist anyway");
                                 Console.ResetColor();
@@ -209,9 +207,7 @@ namespace bluebird {
                             ping.invokePing();
                             break;
                         case "cleardump&":
-                            bool dumpExists2 = File.Exists("dump.dat");
-
-                            if (!dumpExists2) {
+                            if (!File.Exists("dump.dat")) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: a data dump created by bluebird does not exist anyway");
                                 Console.ResetColor();
