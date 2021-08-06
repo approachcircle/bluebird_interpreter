@@ -9,11 +9,14 @@ namespace bluebird {
             public void invokePing() {
                 Ping pingSender = new Ping();
                 PingOptions options = new PingOptions();
+
                 options.DontFragment = true;
+
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                 byte[] buffer = Encoding.ASCII.GetBytes (data);
                 int timeout = 120;
                 string address = "8.8.8.8";
+
                 try {
                     PingReply reply = pingSender.Send (address, timeout, buffer, options);
                     if (reply.Status == IPStatus.Success) {
@@ -34,13 +37,17 @@ namespace bluebird {
             public dynamic getms() {
                 Ping pingSender = new Ping();
                 PingOptions options = new PingOptions();
+
                 options.DontFragment = true;
+
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                 byte[] buffer = Encoding.ASCII.GetBytes (data);
                 int timeout = 120;
                 string address = "8.8.8.8";
+
                 try {
                     PingReply reply = pingSender.Send (address, timeout, buffer, options);
+
                     if (reply.Status == IPStatus.Success) {
                         long ms = reply.RoundtripTime;
                         int rtbuffer = reply.Buffer.Length;
@@ -50,6 +57,7 @@ namespace bluebird {
                     } else {
                         return "error: ping failed, check your connection to " + address + " and try again";
                     }
+                    
                 } catch (PingException) {
                     return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
                 }

@@ -9,16 +9,22 @@ using bluebird.debug;
 using bluebird.emergency;
 
 namespace bluebird {
+
     namespace main {
+
         public class mainClass {
+
             public static void Main(string[] args) {
                 Console.Title = "bluebird interpreter";
+
                 ping.pingClass ping = new ping.pingClass();
                 help.helpClass help = new help.helpClass();
                 debug.debugClass debug = new debug.debugClass();
                 emergency.emergencyClass emergency = new emergency.emergencyClass();
+
                 bool dumpExists = File.Exists("dump.dat");
                 string memory = String.Empty;
+
                 if (dumpExists) {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("info: last exit was unclean, recovering data...");
@@ -29,10 +35,12 @@ namespace bluebird {
                     File.Delete("dump.dat");
                     Console.WriteLine("info: dump deleted");
                 }
+
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine("strike ctrl+c to terminate in case of an emergency");
                 Console.WriteLine("type \"help\" to see a list of available commands");
                 Console.ResetColor();
+
                 while (true) {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write("bluebird>");
@@ -61,6 +69,7 @@ namespace bluebird {
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                             }
+
                             Console.Write("savetomem (what):");
                             Console.ResetColor();
                             memory = Console.ReadLine();
@@ -84,6 +93,7 @@ namespace bluebird {
                             Console.Write("are you sure you want to do this? (yes/no):");
                             Console.ResetColor();
                             string crashOption = Console.ReadLine();
+
                             if (crashOption == "yes") {
                                 emergency.dump(memory);
                                 emergency.die("user inflicted crash");
@@ -118,13 +128,16 @@ namespace bluebird {
                             Console.ResetColor();
                             string fileName = Console.ReadLine();
                             fileName = fileName.ToLower();
+
                             if (fileName == "license") {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: cannot delete license files, doing this may violate the license in itself, so this action is disallowed");
                                 Console.ResetColor();
                                 break;
                             }
+
                             bool isSource = fileName.Contains(".cs");
+
                             if (isSource) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: cannot delete source files, this contradicts Asimov\'s third law of robotics, and these files are needed by the program to compile itself");
@@ -132,16 +145,19 @@ namespace bluebird {
                                 break;
                             }
                             bool fileExists = File.Exists(fileName);
+
                             if (!fileExists) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: this file doesn't exist anyway");
                                 Console.ResetColor();
                                 break;
                             }
+
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.Write("are you sure you want to do this? (yes/no):");
                             Console.ResetColor();
                             string delOption = Console.ReadLine();
+
                             if (delOption == "yes") {
                                 File.Delete(fileName);
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -157,6 +173,7 @@ namespace bluebird {
                             Console.Write("would you like to dump data from memory, or dump your own custom data? (mem/custom):");
                             Console.ResetColor();
                             string dumpWhat = Console.ReadLine();
+
                             if (dumpWhat == "mem") {
                                 emergency.dump(memory);
                                 break;
@@ -174,6 +191,7 @@ namespace bluebird {
                             Console.Write("are you sure you want to do this? (yes/no):");
                             Console.ResetColor();
                             string hangOption = Console.ReadLine();
+
                             if (hangOption == "yes") {
                                 emergency.dump(memory);
                                 Console.WriteLine("putting thread to sleep, goodnight...");
@@ -192,6 +210,7 @@ namespace bluebird {
                             break;
                         case "cleardump&":
                             bool dumpExists2 = File.Exists("dump.dat");
+
                             if (!dumpExists2) {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("error: a data dump created by bluebird does not exist anyway");
@@ -202,6 +221,7 @@ namespace bluebird {
                             Console.Write("are you sure you want to do this? (yes/no):");
                             Console.ResetColor();
                             string deldOption = Console.ReadLine();
+
                             if (deldOption == "yes") {
                                 File.Delete("dump.dat");
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;

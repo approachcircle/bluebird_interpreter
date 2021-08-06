@@ -7,6 +7,7 @@ namespace bluebird {
             public void dump(string data) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
+            
             if (data == "") {
                 Console.WriteLine("info: no data found in memory/provided to be dumped");
                 Console.ResetColor();
