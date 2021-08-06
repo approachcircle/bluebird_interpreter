@@ -1,5 +1,10 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using bluebird.exception;
+using bluebird.main;
+using bluebird.debug;
 
 namespace bluebird {
     namespace emergency {
@@ -7,7 +12,7 @@ namespace bluebird {
             public void dump(string data) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
-            
+
             if (data == "") {
                 Console.WriteLine("info: no data found in memory/provided to be dumped");
                 Console.ResetColor();
@@ -19,11 +24,13 @@ namespace bluebird {
                 Console.ResetColor();
             }
         }
-            public void die(string why = "no reason for crash provided") {
-                Console.ResetColor();
+
+            public void die(string dataToDump, params Exception[] exceptionCaused) {
+                dump(dataToDump);
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("crashing...");
-                throw new Exception(why);
+                Console.ResetColor();
+                throw new AggregateException(exceptionCaused);
             }
         }
     }

@@ -7,6 +7,7 @@ using bluebird.help;
 using bluebird.ping;
 using bluebird.debug;
 using bluebird.emergency;
+using bluebird.exception;
 
 namespace bluebird {
 
@@ -22,8 +23,8 @@ namespace bluebird {
                 debug.debugClass debug = new debug.debugClass();
                 emergency.emergencyClass emergency = new emergency.emergencyClass();
 
-                bool dumpExists = File.Exists("dump.dat");
                 string memory = String.Empty;
+                bool dumpExists = File.Exists("dump.dat");
 
                 if (dumpExists) {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -95,8 +96,7 @@ namespace bluebird {
                             string crashOption = Console.ReadLine();
 
                             if (crashOption == "yes") {
-                                emergency.dump(memory);
-                                emergency.die("user inflicted crash");
+                                emergency.die(memory, new CrashCommandException("user executed crash command"));
                                 break;
                             } else {
                                 Console.WriteLine("okay");
@@ -242,14 +242,12 @@ namespace bluebird {
                             Console.Clear();
                             break;
                         case "":
-                            emergency.dump(memory);
-                            emergency.die("data without the verification character at the end should never be processed");
+                            emergency.die(memory, new InvalidDataEnteredException("data without the verification character at the end should never be processed"));
                             break;
                         case "&":
                             break;
                         case null:
-                            emergency.dump(memory);
-                            emergency.die("null data entered, and no verification character was found in the string");
+                            emergency.die(memory, new InvalidDataEnteredException("null data entered, and no verification character was found in the string"));
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
