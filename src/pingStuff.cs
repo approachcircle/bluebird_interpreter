@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
 namespace bluebird {
@@ -57,7 +57,7 @@ namespace bluebird {
                     } else {
                         return "error: ping failed, check your connection to " + address + " and try again";
                     }
-                    
+
                 } catch (PingException) {
                     return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
                 }

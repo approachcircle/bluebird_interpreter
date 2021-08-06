@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using bluebird.exception;
 using bluebird.main;
 using bluebird.debug;
+using bluebird.exception;
 
 namespace bluebird {
     namespace emergency {
