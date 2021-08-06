@@ -15,5 +15,11 @@ namespace bluebird {
             public InvalidDataEnteredException() { }
             public InvalidDataEnteredException (string why) : base(why) { }
         }
+
+        [Serializable]
+        public class CommandNotFoundException : Exception {
+            public CommandNotFoundException() { }
+            public CommandNotFoundException(string why) : base(why) { }
+        }
     }
 }
