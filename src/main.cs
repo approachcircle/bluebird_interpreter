@@ -231,9 +231,22 @@ namespace bluebird {
                         // case "recalldump&":
                         //    add ability to move dump data to memory
                         //    break;
-                        // case "list&":
-                        //    list files using Directory.GetFiles()
-                        //    break;
+                         case "list&":
+                            string[] files = Directory.GetFiles(".");
+                            string[] dirs = Directory.GetDirectories(".");
+                            
+                            Console.WriteLine("files:");
+                            for (int i = 0; i < files.Length; i++) {
+                                Console.WriteLine(files[i]);
+                            }
+                            
+                            Console.WriteLine();
+
+                            Console.WriteLine("directories:");
+                            for (int i = 0; i < dirs.Length; i++) {
+                                Console.WriteLine(dirs[i]);
+                            }
+                            break;
                         case "clear&":
                             Console.Clear();
                             break;
