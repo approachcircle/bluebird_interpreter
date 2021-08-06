@@ -228,9 +228,21 @@ namespace bluebird {
                                 Console.WriteLine("okay");
                                 break;
                             }
-                        // case "recalldump&":
-                        //    add ability to move dump data to memory
-                        //    break;
+                        case "recalldump&":
+                            if (File.Exists("dump.dat")) {
+                                string[] fileLines2 = File.ReadAllLines("dump.dat");
+                                string dumpedData = String.Concat(fileLines2);
+                                memory = dumpedData;
+                                Console.WriteLine("info: data has been written to memory slot, deleting dump...");
+                                File.Delete("dump.dat");
+                                Console.WriteLine("info: dump deleted");
+                            } else if (!File.Exists("dump.dat")) {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("error: a data dump created by bluebird does not exist anyway");
+                                Console.ResetColor();
+                                break;
+                            }
+                            break;
                          case "list&":
                             string[] files = Directory.GetFiles(".");
                             string[] dirs = Directory.GetDirectories(".");
