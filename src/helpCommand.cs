@@ -24,7 +24,8 @@ namespace bluebird {
                     "ping: gets current network ping over the course of four packets from this computer to 8.8.8.8 (google.com)",
                     "cleardump: deletes any dump files that shouldn't be there, or that you would like to remove",
                     "list: lists all files and directories in the current directory",
-                    "recalldump: moves data from a data dump into the memory slot"
+                    "recalldump: moves data from a data dump into the memory slot",
+                    "downspeed: tests your network's download speed"
                 };
 
                 for (int i = 0; i < cmds.Length; i++) {

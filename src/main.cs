@@ -4,9 +4,9 @@ using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
 using bluebird.help;
-using bluebird.ping;
 using bluebird.debug;
 using bluebird.severe;
+using bluebird.networking;
 using bluebird.exceptions;
 
 namespace bluebird {
@@ -16,10 +16,11 @@ namespace bluebird {
         public static void Main(string[] args) {
             Console.Title = "bluebird interpreter";
 
-            ping.pingClass ping = new ping.pingClass();
             help.helpClass help = new help.helpClass();
             debug.debugClass debug = new debug.debugClass();
             severe.severeClass severe = new severe.severeClass();
+            networking.pingClass ping = new networking.pingClass();
+            networking.DLSpeedClass DLSpeed = new networking.DLSpeedClass(); 
 
             string memory = String.Empty;
 
@@ -241,7 +242,7 @@ namespace bluebird {
                             break;
                         }
                         break;
-                        case "list&":
+                    case "list&":
                         string[] files = Directory.GetFiles(".");
                         string[] dirs = Directory.GetDirectories(".");
                         
@@ -256,6 +257,9 @@ namespace bluebird {
                         for (int i = 0; i < dirs.Length; i++) {
                             Console.WriteLine(dirs[i]);
                         }
+                        break;
+                    case "downspeed&":
+                        DLSpeed.invokeDLSpeedtest();
                         break;
                     case "clear&":
                         Console.Clear();

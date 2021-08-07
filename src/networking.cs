@@ -1,10 +1,13 @@
 using System;
+using System.IO;
+using System.Net;
 using System.Text;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
 namespace bluebird {
-    namespace ping {
+    namespace networking {
         class pingClass {
             public void invokePing() {
                 Ping pingSender = new Ping();
@@ -34,7 +37,7 @@ namespace bluebird {
                 }
             }
 
-            public dynamic getms() {
+            public dynamic getPingMS() {
                 Ping pingSender = new Ping();
                 PingOptions options = new PingOptions();
 
@@ -61,6 +64,71 @@ namespace bluebird {
                 } catch (PingException) {
                     return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
                 }
+            }
+        }
+
+        public class DLSpeedClass {
+            protected const string tmpf = "tempfile.tmp";
+            WebClient wcli = new WebClient();
+            public void invokeDLSpeedtest() {
+                Console.WriteLine("testing download speed...");
+
+                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                try {
+                    wcli.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", tmpf);
+                    sw.Stop();
+                } catch (WebException) {
+                    sw.Stop();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("error: there is a problem with your internet connection. check your connection and try again");
+                    Console.ResetColor();
+                }
+                
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(tmpf);
+                long speedBPS = fileInfo.Length / sw.Elapsed.Seconds;
+                double DSpeedBPS = Convert.ToDouble(speedBPS);
+                double DSpeedMBPS = DSpeedBPS / 1000000;
+                Console.WriteLine("download speed is: '{0}' mbps (megabytes per second)", DSpeedMBPS);
+                File.Delete(tmpf);
+            }
+
+            public int getDLSpeedBPS() {
+                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                try {
+                    wcli.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", tmpf);
+                    sw.Stop();
+                } catch (WebException) {
+                    sw.Stop();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("error: there is a problem with your internet connection. check your connection and try again");
+                    Console.ResetColor();
+                }
+
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(tmpf);
+                long speedBPS2 = fileInfo.Length / sw.Elapsed.Seconds;
+                int ISpeedBPS2 = Convert.ToInt32(speedBPS2);
+                File.Delete(tmpf);
+                return ISpeedBPS2;
+            }
+
+            public int getDLSpeedMBPS() {
+                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                try {
+                    wcli.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", tmpf);
+                    sw.Stop();
+                } catch (WebException) {
+                    sw.Stop();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("error: there is a problem with your internet connection. check your connection and try again");
+                    Console.ResetColor();
+                }
+
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(tmpf);
+                long speedBPS3 = fileInfo.Length / sw.Elapsed.Seconds;
+                int ISpeedBPS3 = Convert.ToInt32(speedBPS3);
+                int ISpeedMBPS3 = ISpeedBPS3 / 1000000;
+                File.Delete(tmpf);
+                return ISpeedMBPS3;
             }
         }
     }
