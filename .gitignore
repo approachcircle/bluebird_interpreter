@@ -16,5 +16,5 @@ testing/
 # open current directory file
 start.bat
 
-# bluebird configuration files
-bluebird.cfg
+# bluebird temporary files
+tempfile.tmp
