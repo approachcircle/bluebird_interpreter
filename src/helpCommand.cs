@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 
-namespace bluebird {
-    namespace help {
-        class helpClass {
-            public void help(){
+namespace Bluebird {
+    namespace Help {
+        class HelpClass {
+            public void Help(){
                 string[] cmds = {
                     "put: allows you to write text to the screen",
                     "get: allows you to get input",

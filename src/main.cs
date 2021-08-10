@@ -3,33 +3,33 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
-using bluebird.help;
-using bluebird.debug;
-using bluebird.severe;
-using bluebird.networking;
-using bluebird.exceptions;
+using Bluebird.Help;
+using Bluebird.Debug;
+using Bluebird.Severe;
+using Bluebird.Networking;
+using Bluebird.Exceptions;
 
-namespace bluebird {
+namespace Bluebird {
 
-    public class mainClass {
+    public class MainClass {
 
         public static void Main(string[] args) {
+            string Memory = String.Empty;
+
+            Help.HelpClass Help = new Help.HelpClass();
+            Debug.DebugClass Debug = new Debug.DebugClass();
+            Severe.SevereClass Severe = new Severe.SevereClass();
+            Networking.PingClass Ping = new Networking.PingClass();
+            Networking.DLSpeedClass DLSpeed = new Networking.DLSpeedClass(); 
+
             Console.Title = "bluebird interpreter";
-
-            help.helpClass help = new help.helpClass();
-            debug.debugClass debug = new debug.debugClass();
-            severe.severeClass severe = new severe.severeClass();
-            networking.pingClass ping = new networking.pingClass();
-            networking.DLSpeedClass DLSpeed = new networking.DLSpeedClass(); 
-
-            string memory = String.Empty;
 
             if (File.Exists("dump.dat")) {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("info: last exit was unclean, recovering data...");
                 string[] fileLines = File.ReadAllLines("dump.dat");
                 string newVal = String.Concat(fileLines);
-                memory = newVal;
+                Memory = newVal;
                 Console.WriteLine("info: data has been written to memory slot, deleting dump...");
                 File.Delete("dump.dat");
                 Console.WriteLine("info: dump deleted");
@@ -64,14 +64,14 @@ namespace bluebird {
                         Console.ReadLine();
                         break;
                     case "savetomem&":
-                        if (memory != String.Empty) {
+                        if (Memory != String.Empty) {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
                         }
 
                         Console.Write("savetomem (what):");
                         Console.ResetColor();
-                        memory = Console.ReadLine();
+                        Memory = Console.ReadLine();
                         Console.WriteLine("value saved to memory slot");
                         break;
                     case "exit&":
@@ -79,10 +79,10 @@ namespace bluebird {
                         System.Environment.Exit(0);
                         break;
                     case "help&":
-                        help.help();
+                        Help.Help();
                         break;
                     case "?&":
-                        help.help();
+                        Help.Help();
                         break;
                     case "retin&":
                         Console.WriteLine(userIn);
@@ -94,7 +94,7 @@ namespace bluebird {
                         string crashOption = Console.ReadLine();
 
                         if (crashOption == "yes") {
-                            severe.die(memory, new CrashCommandException("user executed crash command"));
+                            Severe.Die(Memory, new CrashCommandException("user executed crash command"));
                             break;
                         } else {
                             Console.WriteLine("okay");
@@ -104,20 +104,20 @@ namespace bluebird {
                         Console.WriteLine("you're welcome");
                         break;
                     case "recallmem&":
-                        if (memory == String.Empty) {
+                        if (Memory == String.Empty) {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("error: no value to recall from memory slot");
                         } else {
-                            Console.WriteLine("value is: \"{0}\"", memory);
+                            Console.WriteLine("value is: \"{0}\"", Memory);
                         }
                         break;
                     case "clearmem&":
-                        if (memory == String.Empty) {
+                        if (Memory == String.Empty) {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("error: nothing to clear anyway");
                             break;
                         } else {
-                            memory = String.Empty;
+                            Memory = String.Empty;
                             Console.WriteLine("memory slot cleared");
                             break;
                         }
@@ -172,14 +172,14 @@ namespace bluebird {
                         string dumpWhat = Console.ReadLine();
 
                         if (dumpWhat == "mem") {
-                            severe.dump(memory);
+                            Severe.Dump(Memory);
                             break;
                         } else if (dumpWhat == "custom") {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.Write("please provide the custom data to be dumped:");
                             Console.ResetColor();
                             string customData = Console.ReadLine();
-                            severe.dump(customData);
+                            Severe.Dump(customData);
                             break;
                         }
                         break;
@@ -190,7 +190,7 @@ namespace bluebird {
                         string hangOption = Console.ReadLine();
 
                         if (hangOption == "yes") {
-                            severe.dump(memory);
+                            Severe.Dump(Memory);
                             Console.WriteLine("putting thread to sleep, goodnight...");
                             while (true) {
                                 Thread.Sleep(0);
@@ -200,10 +200,10 @@ namespace bluebird {
                             break;
                         }
                     case "ping&":
-                        ping.invokePing();
-                        ping.invokePing();
-                        ping.invokePing();
-                        ping.invokePing();
+                        Ping.InvokePing();
+                        Ping.InvokePing();
+                        Ping.InvokePing();
+                        Ping.InvokePing();
                         break;
                     case "cleardump&":
                         if (!File.Exists("dump.dat")) {
@@ -231,7 +231,7 @@ namespace bluebird {
                         if (File.Exists("dump.dat")) {
                             string[] fileLines2 = File.ReadAllLines("dump.dat");
                             string dumpedData = String.Concat(fileLines2);
-                            memory = dumpedData;
+                            Memory = dumpedData;
                             Console.WriteLine("info: data has been written to memory slot, deleting dump...");
                             File.Delete("dump.dat");
                             Console.WriteLine("info: dump deleted");
@@ -259,18 +259,18 @@ namespace bluebird {
                         }
                         break;
                     case "downspeed&":
-                        DLSpeed.invokeDLSpeedtest();
+                        DLSpeed.InvokeDLSpeedtest();
                         break;
                     case "clear&":
                         Console.Clear();
                         break;
                     case "":
-                        severe.die(memory, new InvalidDataEnteredException("data without the verification character at the end should never be processed"));
+                        Severe.Die(Memory, new InvalidDataEnteredException("data without the verification character at the end should never be processed"));
                         break;
                     case "&":
                         break;
                     case null:
-                        severe.die(memory, new InvalidDataEnteredException("null data entered, and no verification character was found in the string"));
+                        Severe.Die(Memory, new InvalidDataEnteredException("null data entered, and no verification character was found in the string"));
                         break;
                     default:
                         try {
@@ -284,7 +284,7 @@ namespace bluebird {
                             since that's internal and shouldn't be
                             displayed to the user in the syntax
                             error message
-                            **/
+                            */
                             Console.WriteLine("error: '{0}' is not recognised as a valid command. check the spelling and try again", userIn);
                             break;
                         }

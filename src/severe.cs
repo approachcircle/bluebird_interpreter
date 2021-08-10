@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using bluebird.debug;
-using bluebird.exceptions;
+using Bluebird.Debug;
+using Bluebird.Exceptions;
 
-namespace bluebird {
-    namespace severe {
-        class severeClass {
-            public void dump(string data) {
+namespace Bluebird {
+    namespace Severe {
+        class SevereClass {
+            public void Dump(string data) {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("info: bluebird just called the function to do an emergency dump of data...");
 
@@ -24,8 +24,8 @@ namespace bluebird {
             }
         }
 
-            public void die(string dataToDump, params Exception[] exceptionCaused) {
-                dump(dataToDump);
+            public void Die(string dataToDump, params Exception[] exceptionCaused) {
+                Dump(dataToDump);
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("crashing...");
                 Console.ResetColor();

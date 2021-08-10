@@ -1,8 +1,8 @@
 using System;
 
-namespace bluebird {
+namespace Bluebird {
 
-    namespace exceptions {
+    namespace Exceptions {
 
         [Serializable]
         public class CrashCommandException : Exception {

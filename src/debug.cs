@@ -1,10 +1,10 @@
 using System;
 using System.Text;
 
-namespace bluebird {
-    namespace debug {
-        class debugClass {
-            public void evaluate(string data = "", string action = "write") {
+namespace Bluebird {
+    namespace Debug {
+        class DebugClass {
+            public void Evaluate(string data, string action = "write") {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("--debugging session started--");
                 
