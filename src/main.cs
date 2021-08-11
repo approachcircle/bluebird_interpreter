@@ -17,7 +17,7 @@ namespace Bluebird {
             string Memory = String.Empty;
 
             Help.HelpClass Help = new Help.HelpClass();
-            Debug.DebugClass Debug = new Debug.DebugClass();
+            Debug.EvaluationClass Debug = new Debug.EvaluationClass();
             Severe.SevereClass Severe = new Severe.SevereClass();
             Networking.PingClass Ping = new Networking.PingClass();
             Networking.DLSpeedClass DLSpeed = new Networking.DLSpeedClass(); 
@@ -37,7 +37,7 @@ namespace Bluebird {
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("strike ctrl+c to terminate in case of an emergency");
-            Console.WriteLine("type \"help\" to see a list of available commands");
+            Console.WriteLine("type 'help' to see a list of available commands");
             Console.ResetColor();
 
             while (true) {
@@ -67,6 +67,7 @@ namespace Bluebird {
                         if (Memory != String.Empty) {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("info: data is already in memory slot, anything will be overwritten");
+                            Console.WriteLine("info: {0}='{1}'", nameof(Memory), Memory);
                         }
 
                         Console.Write("savetomem (what):");
@@ -108,13 +109,14 @@ namespace Bluebird {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("error: no value to recall from memory slot");
                         } else {
-                            Console.WriteLine("value is: \"{0}\"", Memory);
+                            Console.WriteLine("{0}='{1}'", nameof(Memory), Memory);
                         }
                         break;
                     case "clearmem&":
                         if (Memory == String.Empty) {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("error: nothing to clear anyway");
+                            Console.WriteLine("{0}='{1}'", nameof(Memory), Memory);
                             break;
                         } else {
                             Memory = String.Empty;
@@ -232,6 +234,7 @@ namespace Bluebird {
                             string[] fileLines2 = File.ReadAllLines("dump.dat");
                             string dumpedData = String.Concat(fileLines2);
                             Memory = dumpedData;
+                            Console.WriteLine("{0}='{1}'", nameof(Memory), Memory);
                             Console.WriteLine("info: data has been written to memory slot, deleting dump...");
                             File.Delete("dump.dat");
                             Console.WriteLine("info: dump deleted");
@@ -246,7 +249,7 @@ namespace Bluebird {
                         string[] files = Directory.GetFiles(".");
                         string[] dirs = Directory.GetDirectories(".");
                         
-                        Console.WriteLine("files:");
+                        Console.WriteLine("{0}:", nameof(files));
                         for (int i = 0; i < files.Length; i++) {
                             Console.WriteLine(files[i]);
                         }
@@ -277,14 +280,7 @@ namespace Bluebird {
                             throw new CommandNotFoundException();
                         } catch (CommandNotFoundException) {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                            userIn = userIn.Trim(new Char[] {'&'});
-                            /**
-                            the above line deletes the verification character
-                            from the end of the user input variable,
-                            since that's internal and shouldn't be
-                            displayed to the user in the syntax
-                            error message
-                            */
+                            userIn = userIn.Trim(new Char[] {'&'}); // delete verification character
                             Console.WriteLine("error: '{0}' is not recognised as a valid command. check the spelling and try again", userIn);
                             break;
                         }

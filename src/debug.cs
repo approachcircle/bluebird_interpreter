@@ -1,21 +1,54 @@
 using System;
 using System.Text;
+using System.IO;
 
 namespace Bluebird {
     namespace Debug {
-        class DebugClass {
-            public void Evaluate(string data, string action = "write") {
+        class EvaluationClass {
+            public void Evaluate(string data) {
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("--debugging session started--");
-                
-                if (action == "write") {
-                    Console.WriteLine("data is: \"{0}\"", data);
-                }
 
-                Console.WriteLine("--debugging session ended--");
+                Type T = data.GetType();
+                Console.WriteLine("{0} has value: '{1}' and is typeof: {2}", nameof(data), data, T.ToString());
+
                 Console.ResetColor();
             }
-            // probably will add more functions in the future
+            
+            public void Evaluate(Int32 data) {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Type T = data.GetType();
+                Console.WriteLine("{0} has value: '{1}' and is typeof: {2}", nameof(data), data, T.ToString());
+
+                Console.ResetColor();
+            }
+
+            public void Evaluate(Int64 data) {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Type T = data.GetType();
+                Console.WriteLine("{0} has value: '{1}' and is typeof: {2}", nameof(data), data, T.ToString());
+
+                Console.ResetColor();
+            }
+
+            public void Evaluate(double data) {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Type T = data.GetType();
+                Console.WriteLine("{0} has value: '{1}' and is typeof: {2}", nameof(data), data, T.ToString());
+
+                Console.ResetColor();
+            }
+
+            public void Evaluate(FileInfo data) {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Type T = data.GetType();
+                Console.WriteLine("{0} has value: '{1}' and is typeof: {2}", nameof(data), data, T.ToString());
+
+                Console.ResetColor();
+            }
         }
     }
 }

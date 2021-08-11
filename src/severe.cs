@@ -16,7 +16,7 @@ namespace Bluebird {
                 Console.WriteLine("info: no data found in memory/provided to be dumped");
                 Console.ResetColor();
             } else {
-                Console.WriteLine("info: data has been found, so it will be dumped");
+                Console.WriteLine("info: {0}='{1}'", nameof(data), data);
                 Console.WriteLine("info: dumping data...");
                 File.WriteAllText("dump.dat", data);
                 Console.WriteLine("info: data dumped");

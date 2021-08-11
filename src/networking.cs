@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Bluebird.Debug;
 
 namespace Bluebird {
     namespace Networking {
@@ -67,7 +68,9 @@ namespace Bluebird {
         public class DLSpeedClass {
             protected const string TempFile = "tempfile.tmp";
             private WebClient WebClientObject = new WebClient();
+            EvaluationClass Eval = new EvaluationClass();
             public void InvokeDLSpeedtest() {
+                Console.WriteLine("this command can sometimes fail on different networks");
                 Console.WriteLine("testing download speed...");
 
                 System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
@@ -81,11 +84,18 @@ namespace Bluebird {
                     Console.ResetColor();
                 }
                 
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(TempFile);
-                long speedBPS = fileInfo.Length / sw.Elapsed.Seconds; //! one of these throw a DivideByZeroException sometimes
-                double DoubleSpeedBPS = Convert.ToDouble(speedBPS);
-                double DoubleSpeedMBPS = DoubleSpeedBPS / 1000000; //! one of these throw a DivideByZeroException sometimes
-                Console.WriteLine("download speed is: '{0}' mbps (megabytes per second)", DoubleSpeedMBPS);
+                FileInfo fileInfo = new FileInfo(TempFile);
+
+                try {
+                    long speedBPS = fileInfo.Length / sw.Elapsed.Seconds;
+                    double DoubleSpeedBPS = Convert.ToDouble(speedBPS);
+                    double DoubleSpeedMBPS = DoubleSpeedBPS / 1000000;
+                    Console.WriteLine("download speed is: '{0}' mbps (megabytes per second)", DoubleSpeedMBPS);
+                } catch (DivideByZeroException) {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("error: an error has occurred, please try this command again later");
+                }
+
                 File.Delete(TempFile);
             }
 
