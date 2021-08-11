@@ -13,7 +13,7 @@ namespace Bluebird {
         [Serializable]
         public class InvalidDataEnteredException : Exception {
             public InvalidDataEnteredException() { }
-            public InvalidDataEnteredException (string why) : base(why) { }
+            public InvalidDataEnteredException(string why) : base(why) { }
         }
 
         [Serializable]
