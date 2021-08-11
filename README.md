@@ -1,11 +1,7 @@
 <!-- markdownlint-disable MD033 -->
 # bluebird
 
-this is the repository that contains the source code for the bluebird interpreter.
-
-## what is it?
-
-bluebird is an interpreter written in C#, that only exists because i was bored (much like all of my other repositories.)
+this is the repository that contains the source code for the bluebird interpreter. bluebird is a custom command interpreter written in C#, that only exists because i was bored (much like all of my other repositories.)
 
 ## compiling
 
@@ -22,6 +18,10 @@ if you download and install mono <a href="https://www.mono-project.com/download/
 ## what's mono?
 
 as quoted by mono on their homepage, "Sponsored by Microsoft, Mono is an open source implementation of Microsoft's .NET Framework based on the ECMA standards for C# and the Common Language Runtime." so yeah, that's what mono is. if you want to know more, you can read more about them on the homepage of their website <a href="https://www.mono-project.com/">here</a>.
+
+## can i use .NET instead?
+
+this project is ready to be used for the .NET framework if you would prefer, you just need to copy the code over into a .NET environment and build it using .NET's build tools instead. code written in C# that is targeted for the mono framework is mostly .NET ready unless it contains using directives referring to mono libraries, and if it does, you should be able to find nuget packages and .dlls containing the library code on the nuget gallery.
 
 ## command list
 
