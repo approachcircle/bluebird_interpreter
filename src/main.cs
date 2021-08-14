@@ -3,13 +3,13 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.NetworkInformation;
-using Bluebird.Help;
-using Bluebird.Debug;
-using Bluebird.Severe;
-using Bluebird.Networking;
-using Bluebird.Exceptions;
+using bluebird.Help;
+using bluebird.Severe;
+using bluebird.Networking;
+using bluebird.Exceptions;
+using approachcircle.Debug;
 
-namespace Bluebird {
+namespace bluebird {
 
     public class MainClass {
 
@@ -17,7 +17,7 @@ namespace Bluebird {
             string Memory = String.Empty;
 
             Help.HelpClass Help = new Help.HelpClass();
-            Debug.EvaluationClass Debug = new Debug.EvaluationClass();
+            approachcircle.Debug.Evaluations Debug = new approachcircle.Debug.Evaluations();
             Severe.SevereClass Severe = new Severe.SevereClass();
             Networking.PingClass Ping = new Networking.PingClass();
             Networking.DLSpeedClass DLSpeed = new Networking.DLSpeedClass(); 

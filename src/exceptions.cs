@@ -1,6 +1,6 @@
 using System;
 
-namespace Bluebird {
+namespace bluebird {
 
     namespace Exceptions {
 

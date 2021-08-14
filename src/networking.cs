@@ -5,9 +5,9 @@ using System.Text;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using Bluebird.Debug;
+using approachcircle.Debug;
 
-namespace Bluebird {
+namespace bluebird {
     namespace Networking {
         class PingClass {
 
@@ -68,7 +68,6 @@ namespace Bluebird {
         public class DLSpeedClass {
             protected const string TempFile = "tempfile.tmp";
             private WebClient WebClientObject = new WebClient();
-            EvaluationClass Eval = new EvaluationClass();
             public void InvokeDLSpeedtest() {
                 Console.WriteLine("this command can sometimes fail on different networks");
                 Console.WriteLine("testing download speed...");

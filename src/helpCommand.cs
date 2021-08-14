@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Bluebird {
+namespace bluebird {
     namespace Help {
         class HelpClass {
             public void Help(){

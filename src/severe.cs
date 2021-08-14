@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using Bluebird.Debug;
-using Bluebird.Exceptions;
+using bluebird.Exceptions;
+using approachcircle.Debug;
 
-namespace Bluebird {
+namespace bluebird {
     namespace Severe {
         class SevereClass {
             public void Dump(string data) {
