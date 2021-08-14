@@ -2,9 +2,9 @@ using System;
 using System.Text;
 using System.IO;
 
-namespace Bluebird {
+namespace approachcircle {
     namespace Debug {
-        class EvaluationClass {
+        class Evaluations {
             public void Evaluate(string data) {
                 Console.ForegroundColor = ConsoleColor.Cyan;
 
