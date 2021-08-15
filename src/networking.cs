@@ -25,16 +25,19 @@ namespace bluebird {
                     PingReply reply = PingSender.Send (address, timeout, buffer, Options);
                     if (reply.Status == IPStatus.Success) {
                         Console.WriteLine("pong! {0}ms, buffer_size={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
+                        PingSender.Dispose();
                     } else {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("error: ping failed, check your connection to {0} and try again", address);
                         Console.ResetColor();
+                        PingSender.Dispose();
                     }
                 } catch (PingException) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked");
                     Console.WriteLine("error: address value is: {0}, should be 8.8.8.8", address);
                     Console.ResetColor();
+                    PingSender.Dispose();
                 }
             }
 
@@ -54,12 +57,15 @@ namespace bluebird {
                         int rtbuffer = reply.Buffer.Length;
                         int rtttl = reply.Options.Ttl;
                         System.Net.IPAddress rtaddr = reply.Address;
+                        PingSender.Dispose();
                         return ms;
                     } else {
+                        PingSender.Dispose();
                         return "error: ping failed, check your connection to " + address + " and try again";
                     }
 
                 } catch (PingException) {
+                    PingSender.Dispose();
                     return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
                 }
             }
@@ -67,16 +73,18 @@ namespace bluebird {
 
         public class DLSpeedClass {
             protected const string TempFile = "tempfile.tmp";
-            private WebClient WebClientObject = new WebClient();
             public void InvokeDLSpeedtest() {
+                WebClient WebClientObject = new WebClient();
                 Console.WriteLine("this command can sometimes fail on different networks");
                 Console.WriteLine("testing download speed...");
 
-                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                Stopwatch sw = Stopwatch.StartNew();
                 try {
                     WebClientObject.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", TempFile);
                     sw.Stop();
+                    WebClientObject.Dispose();
                 } catch (WebException) {
+                    WebClientObject.Dispose();
                     sw.Stop();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("error: there is a problem with your internet connection. check your connection and try again");
@@ -99,10 +107,12 @@ namespace bluebird {
             }
 
             public int GetDLSpeedBPS() {
-                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                WebClient WebClientObject = new WebClient();
+                Stopwatch sw = Stopwatch.StartNew();
                 try {
                     WebClientObject.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", TempFile);
                     sw.Stop();
+                    WebClientObject.Dispose();
                 } catch (WebException) {
                     sw.Stop();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -118,10 +128,12 @@ namespace bluebird {
             }
 
             public int GetDLSpeedMBPS() {
-                System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+                WebClient WebClientObject = new WebClient();
+                Stopwatch sw = Stopwatch.StartNew();
                 try {
                     WebClientObject.DownloadFile("http://dl.google.com/googletalk/googletalk-setup.exe", TempFile);
                     sw.Stop();
+                    WebClientObject.Dispose();
                 } catch (WebException) {
                     sw.Stop();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
