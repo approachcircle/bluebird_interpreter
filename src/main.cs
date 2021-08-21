@@ -38,6 +38,23 @@ namespace bluebird {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("strike ctrl+c to terminate in case of an emergency");
             Console.WriteLine("type 'help' to see a list of available commands");
+            var currentPing = Ping.GetPingMS();
+            if (currentPing < 50) {
+                Console.WriteLine("ping is very good ({0}ms)", currentPing);
+            } else if (currentPing > 50 & currentPing < 100) {
+                Console.WriteLine("ping is good ({0}ms)", currentPing);
+            } else if (currentPing > 100 & currentPing < 250) {
+                Console.WriteLine("ping isn't the best ({0}ms)", currentPing);
+            } else if (currentPing > 250 & currentPing < 500) {
+                Console.WriteLine("ping is bad ({0}ms)", currentPing);
+            } else if (currentPing > 500) {
+                Console.WriteLine("ping is very bad ({0}ms)", currentPing);
+            } else if (currentPing == null) {
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("error: startup ping failed, check your connection and run the ping command");
+                Console.ResetColor();
+            }
             Console.ResetColor();
 
             while (true) {

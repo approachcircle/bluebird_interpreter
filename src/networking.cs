@@ -10,8 +10,6 @@ using approachcircle.Debug;
 namespace bluebird {
     namespace Networking {
         class PingClass {
-
-            private Ping PingSender = new Ping();
             private PingOptions Options = new PingOptions();
             public void InvokePing() {
                 Options.DontFragment = true;
@@ -20,9 +18,10 @@ namespace bluebird {
                 byte[] buffer = Encoding.ASCII.GetBytes (data);
                 int timeout = 120;
                 string address = "8.8.8.8";
-
+                Ping PingSender = new Ping();
                 try {
                     PingReply reply = PingSender.Send (address, timeout, buffer, Options);
+
                     if (reply.Status == IPStatus.Success) {
                         Console.WriteLine("pong! {0}ms, buffer_size={1}, TTL={2}, addr={3}", reply.RoundtripTime,reply.Buffer.Length,reply.Options.Ttl,reply.Address.ToString());
                         PingSender.Dispose();
@@ -32,6 +31,7 @@ namespace bluebird {
                         Console.ResetColor();
                         PingSender.Dispose();
                     }
+
                 } catch (PingException) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked");
@@ -41,7 +41,8 @@ namespace bluebird {
                 }
             }
 
-            public dynamic GetPingMS() {
+            #nullable enable
+            public dynamic? GetPingMS() {
                 Options.DontFragment = true;
 
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -49,6 +50,7 @@ namespace bluebird {
                 int timeout = 120;
                 string address = "8.8.8.8";
 
+                Ping PingSender = new Ping();
                 try {
                     PingReply reply = PingSender.Send (address, timeout, buffer, Options);
 
@@ -61,14 +63,17 @@ namespace bluebird {
                         return ms;
                     } else {
                         PingSender.Dispose();
-                        return "error: ping failed, check your connection to " + address + " and try again";
+                        //// return "error: ping failed, check your connection to " + address + " and try again";
+                        return null;
                     }
 
                 } catch (PingException) {
                     PingSender.Dispose();
-                    return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
+                    //// return "error: the address that the ping was supposed to be sent to has either been changed from its original value of 8.8.8.8 to an unreachable address, or the connection to the destination address has been blocked";
+                    return null;
                 }
             }
+            #nullable disable
         }
 
         public class DLSpeedClass {
