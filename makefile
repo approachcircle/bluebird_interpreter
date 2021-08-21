@@ -1,4 +1,6 @@
 binary:
+	@echo please wait...
+	@if exist bin\ (echo dir ok) else (mkdir bin\)
 	@echo running compiler...
 	@csc -recurse:src/*.cs -out:bin/bluebird.exe -nologo
 clean:
