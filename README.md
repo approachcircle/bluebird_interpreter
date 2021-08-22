@@ -7,13 +7,23 @@ this is the repository that contains the source code for the bluebird interprete
 
 [![approachcircle's GitHub stats](https://github-readme-stats.vercel.app/api?username=approachcircle)](https://github.com/approachcircle/bluebird_interpreter)
 
-## compiling
+## compiling and OS compatibility
 
-bluebird is natively compiled using csc.exe. this project has a makefile which you can execute with the correct targets though. the 'clean' target will delete the bluebird binary, the 'binary' target will produce an executable binary with the filename 'bluebird.exe' in the 'bin' directory, and the 'run' target executes the program. so the ideal make command would be:
+bluebird is compiled using the csc program in mono's API. the project contains a makefile for easy compilation and execution for both linux and windows. to compile bluebird for windows, you would use the following command:
 
-```make
-make clean binary run
+```shell
+make wclean wbinary wrun
 ```
+
+and for compiling to linux using bash, you would use this command:
+```shell
+make lclean lbinary lrun
+```
+the wclean or lclean targets delete the compiled binary file, the wbinary or lbinary targets compile the source code into either "bin\bluebird.exe" for windows, or "bin/bluebird" for linux, and the wrun or lrun targets run the compiled binary file either straight from the command line as an executable (windows) or using the mono runtime program (linux)
+
+### NOTICE
+
+the bash shell for linux is required to be located at /bin/bash, as some commands use that path to execute commands through bash.
 
 ## where do i get the compiler?
 
