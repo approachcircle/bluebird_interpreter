@@ -6,10 +6,13 @@ wclean:
 wbinary:
 	@if not exist bin\ (echo binary folder does not exist, creating... && mkdir bin\)
 	@echo running compiler...
-	@csc -recurse:src/*.cs -out:bin/bluebird.exe -nologo
+	@csc -recurse:src/*.cs -out:bin/bluebird.exe -d:TRACE -nologo
 wrun:
 	@echo executing...
 	@bin\bluebird.exe
+wrunmono:
+	@echo executing with mono runtime...
+	@mono bin\bluebird.exe
 
 # linux targets:
 lclean:
