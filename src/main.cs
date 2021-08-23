@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Diagnostics;
 using System.Net.NetworkInformation;
 using bluebird.Help;
 using bluebird.Severe;
 using bluebird.Networking;
 using bluebird.Exceptions;
-using approachcircle.Debug;
 
 namespace bluebird {
 
@@ -17,10 +17,10 @@ namespace bluebird {
             string Memory = String.Empty;
 
             Help.HelpClass Help = new Help.HelpClass();
-            approachcircle.Debug.Evaluations Debug = new approachcircle.Debug.Evaluations();
             Severe.SevereClass Severe = new Severe.SevereClass();
             Networking.PingClass Ping = new Networking.PingClass();
             Networking.DLSpeedClass DLSpeed = new Networking.DLSpeedClass(); 
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
             Console.Title = "bluebird interpreter";
 
@@ -38,7 +38,7 @@ namespace bluebird {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("strike ctrl+c to terminate in case of an emergency");
             Console.WriteLine("type 'help' to see a list of available commands");
-            var currentPing = Ping.GetPingMS();
+            long? currentPing = Ping.GetPingMS();
             if (currentPing < 50) {
                 Console.WriteLine("ping is very good ({0}ms)", currentPing);
             } else if (currentPing > 50 & currentPing < 100) {
@@ -279,7 +279,14 @@ namespace bluebird {
                         }
                         break;
                     case "downspeed&":
-                        DLSpeed.InvokeDLSpeedtest();
+                        double? speedMBPS = DLSpeed.GetDLSpeedMBPS();
+                        if (speedMBPS != null) {
+                            Console.WriteLine("download speed is: {0} mbps (megabytes per second)");
+                        } else if (speedMBPS == null) {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("error: speedtest failed, please try again later");
+                            Console.ResetColor();
+                        }
                         break;
                     case "clear&":
                         Console.Clear();

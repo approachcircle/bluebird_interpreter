@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using bluebird.Exceptions;
-using approachcircle.Debug;
 
 namespace bluebird {
     namespace Severe {
