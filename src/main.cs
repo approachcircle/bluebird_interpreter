@@ -279,9 +279,11 @@ namespace bluebird {
                         }
                         break;
                     case "downspeed&":
+                        Console.WriteLine("this command may fail on certain networks");
+                        Console.WriteLine("testing download speed...");
                         double? speedMBPS = DLSpeed.GetDLSpeedMBPS();
                         if (speedMBPS != null) {
-                            Console.WriteLine("download speed is: {0} mbps (megabytes per second)");
+                            Console.WriteLine("download speed is: {0} mbps (megabytes per second)", speedMBPS);
                         } else if (speedMBPS == null) {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("error: speedtest failed, please try again later");
